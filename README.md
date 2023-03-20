@@ -6,7 +6,24 @@ User-story: As a League of Legends addict/user, I want to be able to see champio
 https://roan-anglerfish-3db.notion.site/Wiki-van-Safouane-GG-832532f851a447d39126426f8f297452
 
 ## Known bugs
-- [x] No bugs only features ;)
+- [] Not responsive
+
+## Things that I'm working on now that are required
+- [~] Reworking the client side application to server side with Node.js & Express
+- [] Adding Empty states
+- [] Adding Loading states
+- [] Adding Fail states 
+- [] Responsive design 
+- [] More consistent with the UI and make it more User friendly
+- [] Autocomplete when you're looking for a summoner
+- [~] Champion rotation as the default state
+- [] Ranked solo and flex queue last played games and data about said games.
+- [] Refactorring 
+
+## Extra but also required
+- [] Wireframes
+- [] Activity diagram
+
 ## Assets:
 1. https://developer.riotgames.com/apis
 2. https://developer.riotgames.com/docs/lol
@@ -27,11 +44,6 @@ git clone git@github.com:SafouaneM/web-app-from-scratch-2223.git
 ```
 And you should be good to go now, do not forget to implement your own api key in the api.js.
 You can request an api key from this url, it'll take no longer then 1 minute to generate one
-#### !(Do note you need a riot games account to generate a key.)!
+### !(Do note you need a riot games account to generate a key.)!
 
 
-### Bonus things that I will implement / working on
-- [] Autocomplete when you're looking for a summoner
-- [~] Champion rotation as the default state
-- [] Ranked solo and flex queue last played games and data about said games.
-- [] Responsive design 🤪🤪🤪
