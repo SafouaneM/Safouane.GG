@@ -1,4 +1,4 @@
-import { getKey } from '/spa/src/api.js';
+import { getKey } from '../api.js';
 
 const key = getKey();
 
