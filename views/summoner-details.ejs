@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title><%summonerName %></title>
+</head>
+<body>
+<% if (summonerName) { %>
+    <h1> <%= summonerName %></h1>
+
+
+    <h2>Solo Queue:</h2>
+    <p>Tier: <%= soloQueueData.tier %></p>
+    <p>LP: <%= soloQueueData.lp %></p>
+    <p>Results: <%= soloQueueData.results %></p>
+    <p>Win Rate: <%= soloQueueData.winRate %></p>
+
+    <h2>Flex Queue:</h2>
+    <p>Tier: <%= flexQueueData.tier %></p>
+    <p>LP: <%= flexQueueData.lp %></p>
+    <p>Results: <%= flexQueueData.results %></p>
+    <p>Win Rate: <%= flexQueueData.winRate %></p>
+<% } %>
+</body>
+</html>

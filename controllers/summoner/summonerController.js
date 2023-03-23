@@ -1,22 +1,17 @@
-import fetch from 'node-fetch'
-import { config } from 'dotenv';
-config();
-const apiKey = process.env.RIOT_API_KEY;
+import express from 'express'
+import {getSummonerData} from "../../models/getSummonerData.js";
 
-    export default async function fetchSummoner(req, res) {
+const router = express.Router()
+
+router.get('/:name', async (req,res) => {
+    try{
         const summonerName = req.params.name
+        const summonerData = await getSummonerData(summonerName)
 
-        try {
-            const summonerDataResponse = await fetch(`https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summonerName}?api_key=${apiKey}`);
-            if (!summonerDataResponse.ok) {
-                throw new Error('No response between range 200-299');
-            }
-            const summoner = await summonerDataResponse.json();
-            console.log(summoner);
-            res.json(summoner);
-        } catch (error) {
-            console.error('error: username does not exist');
-            res.status(404).send('Summoner not found');
-        }
-
-}
+        res.render('summoner',{summonerData})
+    }
+    catch (error){
+        console.error(error)
+        res.status(500).send('Error retrieving summoner data vitconecttt')
+    }
+})

@@ -1,9 +1,8 @@
 import express from 'express';
 const router = express.Router();
-import fetchSummoner from '../../controllers/summoner/summonerController.js'
 
+import {getSummonerData} from "../../models/getSummonerData.js";
 
-router.get('/api/summoner/:name', fetchSummoner )
-
+router.get('/', getSummonerData)
 
 export default router
