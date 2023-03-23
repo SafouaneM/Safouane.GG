@@ -21,7 +21,7 @@ app.post("/summoner", (req, res) => {
 
 app.get("/summoner/:summonerName", getSummonerData);
 
-app.get('summoner/:summonerName/:championId',getChampionData)
+app.get('/api/summoner/:summonerName/:championId',getChampionData)
 
 app.listen(port, () => {
         console.log(`Server started on port ${port}`);

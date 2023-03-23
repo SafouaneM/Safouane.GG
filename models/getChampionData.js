@@ -16,15 +16,14 @@ export const getChampionData = async (req, res) => {
             const filteredName = getFilteredName(selectedChampion.id);
             const singularData = await fetchSingleChampion(filteredName);
 
-            res.render("summoner-details", {
-                summonerName: summonerName,
+            res.json({
                 championName: selectedChampion.name,
                 championTitle: selectedChampion.title,
                 championBio: singularData.lore,
-                championSplash: `https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${filteredName}_0.jpg`,
-            });
+                championSplash: `https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${filteredName}_0.jpg`
+        });
         } else {
-            res.status(404).send('Champion not found');
+            res.status(404).json({ error: 'Champion not found' });
         }
     } catch (error) {
         console.error(error);

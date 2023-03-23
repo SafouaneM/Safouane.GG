@@ -34,27 +34,37 @@
     <div class="champion-slider-style">
         <% for (let i = 0; i < 6 && i < summonerMastery.length; i++) { %>
             <% const championId = summonerMastery[i].championId; %>
-            <% console.log('Champion ID:', championId); %>
-            <% console.log('Champion Data:', championData.data); %>
             <% const championName = champions[championId]; %>
             <li class="single-champion-slider">
-                <a href="/summoner/<%= summonerName %>/<%= championId %>">
+                <a href="javascript:void(0);" onclick="displayChampionDetails('<%= summonerName %>', '<%= championId %>')">
                     <img src="https://ddragon.leagueoflegends.com/cdn/11.20.1/img/champion/<%= getFilteredName(championName) %>.png" alt="<%= championName %>">
                     <p><%= championName %></p>
+                    <div class="champion-details" id="champion-details">
+
+                    </div>
                 </a>
             </li>
-
-            <div id="champion-details">
-                <h2><%= championName %></h2>
-                <h3><%= championTitle %></h3>
-                <p><%= championBio %></p>
-                <img src="<%= championSplash %>" alt="<%= championName %> Splash Art">    </div>
-
         <% } %>
     </div>
 
 
 
 <% } %>
+<script>
+    async function displayChampionDetails(summonerName, championId) {
+        try {
+            const response = await fetch(`/api/summoner/${summonerName}/${championId}`);
+            const championDetails = await response.json();
+
+            document.getElementById("champion-details").innerHTML = `
+                <h2>${championDetails.championName}</h2>
+                <h3>${championDetails.championTitle}</h3>
+                <p>${championDetails.championBio}</p>
+            `;
+        } catch (error) {
+            console.error(error);
+        }
+    }
+</script>
 </body>
 </html>
