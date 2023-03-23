@@ -1,6 +1,9 @@
 import fetchSummoner from "./fetch/fetchSummoner.js";
 import {getQueueData} from "./helpers/getQueueData.js";
 import fetchElo from "./fetch/fetchElo.js";
+import fetchMasteryBySummonerId from "./fetch/fetchMasteryBySummonerId.js";
+import fetchChampions from "./fetch/fetchChampions.js";
+import getFilteredName from "./helpers/getFilteredName.js";
 
 export const getSummonerData = async (req, res) => {
     const summonerName = req.params.summonerName;
@@ -13,7 +16,12 @@ export const getSummonerData = async (req, res) => {
             return;
         }
 
-        const summonerId = summoner.id;
+        const summonerId = summoner.id; // Define summonerId here
+        const summonerMastery = await fetchMasteryBySummonerId(summonerId);
+        const championData = await fetchChampions();
+
+        console.log('correct data',championData)
+
         const summonerElo = await fetchElo(summonerId);
 
         const soloQueueData = getQueueData(summonerElo, "RANKED_SOLO_5x5");
@@ -25,6 +33,9 @@ export const getSummonerData = async (req, res) => {
             summonerIconId: summoner.profileIconId,
             soloQueueData: soloQueueData,
             flexQueueData: flexQueueData,
+            summonerMastery: summonerMastery,
+            championData: championData,
+            getFilteredName: getFilteredName,
         });
     } catch (error) {
         console.error(error);
