@@ -7,6 +7,7 @@ const port = 3000;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static('public'))
 
 app.set("view engine", "ejs");
 
@@ -16,7 +17,7 @@ app.get("/summoner", (req, res) => {
 
 app.post("/summoner", (req, res) => {
         const summonerName = req.body.summonerName;
-        res.redirect(`/summoner/${summonerName}`);
+        res.redirect(`/summoner/${summonerName}?loadingState=true`);
 });
 
 app.get("/summoner/:summonerName", getSummonerData);

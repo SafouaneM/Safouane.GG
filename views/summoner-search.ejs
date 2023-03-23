@@ -1,15 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Summoner Search</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/main.css">
+    <title>Safouane.GG</title>
 </head>
-<body>
-<h1>Summoner Search</h1>
-<form method="POST" action="/summoner">
-    <label for="summonerName">Summoner Name:</label>
-    <input type="text" id="summonerName" name="summonerName" required>
-    <button type="submit">Submit</button>
-</form>
+
+<body class="bg-gray-100">
+<div id="loadingBar" class="hidden w-full h-1 bg-yellow-500 animate-loading"></div>
+<header class="bg-white shadow">
+    <nav class="container mx-auto px-6 py-3">
+        <div class="flex items-center justify-between">
+            <div class="text-gray-800 text-xl font-semibold">Safouane.GG</div>
+            <div class="flex items-center space-x-4">
+                <a href="#" class="text-gray-800 hover:text-gray-500">Home</a>
+                <a href="#" class="text-gray-800 hover:text-gray-500">Champions</a>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main class="container mx-auto px-6 py-20">
+    <div class="flex flex-col items-center">
+        <h1 class="text-4xl font-bold mb-6">SAFOUANE.GG</h1>
+        <form action="/summoner" method="POST" class="w-full max-w-md">
+            <div class="flex items-center border-b border-b-2 border-teal-500 py-2">
+                <input name="summonerName" type="text" placeholder="Enter summoner name" class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none">
+                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Search</button>
+            </div>
+        </form>
+    </div>
+</main>
+
+<footer class="bg-white shadow mt-12 ">
+    <div class="container mx-auto px-6 py-3 flex justify-between items-center ">
+        <div class="text-gray-800 text-sm">&copy; 2023 Safouane.GG</div>
+        <div class="flex items-center space-x-4">
+            <a href="#" class="text-gray-800 hover:text-gray-500">About</a>
+            <a href="#" class="text-gray-800 hover:text-gray-500">Privacy</a>
+            <a href="#" class="text-gray-800 hover:text-gray-500">Terms</a>
+        </div>
+    </div>
+</footer>
+<script src="/js/loadingState.js"></script>
 </body>
 </html>

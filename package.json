@@ -11,7 +11,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "devStart": "nodemon server.js"
+    "devStart": "nodemon server.js",
+    "build:css": "postcss style.css -o public/main.css"
   },
   "repository": {
     "type": "git",
@@ -24,11 +25,14 @@
   },
   "homepage": "https://github.com/SafouaneM/progressive-web-apps-2223#readme",
   "dependencies": {
+    "autoprefixer": "^10.4.14",
     "dotenv": "^16.0.3",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
-    "express-ejs-layouts": "^2.5.1",
-    "node-fetch": "^3.3.1"
+    "node-fetch": "^3.3.1",
+    "postcss": "^8.4.21",
+    "postcss-cli": "^10.1.0",
+    "tailwindcss": "^3.2.7"
   },
   "devDependencies": {
     "nodemon": "^2.0.21"
