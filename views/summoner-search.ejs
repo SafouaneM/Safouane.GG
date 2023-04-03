@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/main.css">
     <title>Safouane.GG</title>
+    <link rel="manifest" href="/manifest.json">
 </head>
 
 <body class="bg-gray-100 flex flex-col min-h-screen">
@@ -16,6 +17,7 @@
             <div class="flex items-center space-x-4">
                 <a href="#" class="text-gray-800 hover:text-gray-500">Home</a>
                 <a href="#" class="text-gray-800 hover:text-gray-500">Champions</a>
+                <a href="/download" class="px-4 py-2 rounded-md bg-blue-500 text-white hover:bg-blue-600">Download</a>
             </div>
         </div>
     </nav>
@@ -45,5 +47,32 @@
     </div>
 </footer>
 <script src="/js/loadingState.js"></script>
+<script src="/service-worker.js"></script>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                }, function(err) {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
+
+
+        // Define download function
+        const downloadManifest = () => {
+            const manifestUrl = '/manifest.json';
+            const a = document.createElement('a');
+            a.href = manifestUrl;
+            a.download = manifestUrl.split('/').pop();
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        };
+</script>
+
+
 </body>
 </html>
