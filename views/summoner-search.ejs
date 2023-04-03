@@ -26,7 +26,7 @@
 <main class="container mx-auto px-6 py-20 flex-grow">
     <div class="flex flex-col items-center">
         <h1 class="text-4xl font-bold mb-6">SAFOUANE.GG</h1>
-        <form action="/summoner" method="POST" class="w-full max-w-md">
+        <form id="summoner-form" action="/summoner" method="POST" class="w-full max-w-md">
             <div class="flex items-center border-b border-b-2 border-teal-500 py-2">
                 <input name="summonerName" type="text" placeholder="Enter summoner name" class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none">
                 <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Search</button>
@@ -61,17 +61,9 @@
         }
 
 
-        // Define download function
-        const downloadManifest = () => {
-            const manifestUrl = '/manifest.json';
-            const a = document.createElement('a');
-            a.href = manifestUrl;
-            a.download = manifestUrl.split('/').pop();
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-        };
-</script>
+
+
+    </script>
 
 
 </body>

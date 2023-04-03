@@ -1,4 +1,8 @@
 import express from "express";
+import { fileURLToPath } from 'url';
+import path from 'path';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 import { getSummonerData } from "./models/getSummonerData.js";
 import {getChampionData} from './models/getChampionData.js'
 
@@ -11,6 +15,9 @@ app.use(express.static('public'))
 
 app.set("view engine", "ejs");
 
+app.get('/offline', (req, res) => {
+        res.sendFile('offline.html', { root: path.join(__dirname, 'public') });
+});
 app.get("/summoner", (req, res) => {
         res.render("summoner-search");
 });
