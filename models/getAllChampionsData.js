@@ -14,7 +14,7 @@ export const getAllChampionsData = async (pageSize, offset) => {
                 name: champion.name,
                 title: champion.title,
                 blurb: champion.blurb,
-                splash: `https://champion-images.imgix.net/${filteredName}_0.jpg?w=580&auto=compress&fm=webp`,
+                splash: `https://champion-images.imgix.net/${filteredName}_0.jpg?w=580&auto=compress&fm=auto`,
             };
         });
 
@@ -36,7 +36,7 @@ export const getSingleChampionData = async (id) => {
             name: championData.data[filteredName].name,
             title: championData.data[filteredName].title,
             lore: championData.data[filteredName].lore,
-            splash: `https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${filteredName}_0.jpg`,
+            splash: `https://champion-images.imgix.net/${filteredName}_0.jpg?w=800&auto=compress&fm=auto`,
             spells: championData.data[filteredName].spells,
         };
     } catch (error) {

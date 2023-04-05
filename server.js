@@ -4,7 +4,6 @@ import path from 'path';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 import { getSummonerData } from "./models/getSummonerData.js";
-import {getChampionData} from './models/getChampionData.js';
 import {getAllChampionsData, getSingleChampionData} from './models/getAllChampionsData.js';
 
 const app = express();
@@ -59,7 +58,6 @@ app.post("/summoner", (req, res) => {
 
 app.get("/summoner/:summonerName", getSummonerData);
 
-app.get('/api/summoner/:summonerName/:championId',getChampionData)
 
 app.listen(port, () => {
         console.log(`Server started on port ${port}`);

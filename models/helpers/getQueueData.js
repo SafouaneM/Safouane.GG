@@ -1,3 +1,4 @@
+//todo this is my proudest creation
 export const getQueueData = (summonerElo, queueType) => {
     const elo = summonerElo.find(function (elo) {
         return elo.queueType === queueType;

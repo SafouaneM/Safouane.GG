@@ -1,9 +1,9 @@
 {
   "name": "progressive-web-apps-2223",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "description": "pwa course",
-  "main": "./spa/public/final/index.js",
+  "main": "server.js",
   "directories": {
     "doc": "docs",
     "example": "examples",
