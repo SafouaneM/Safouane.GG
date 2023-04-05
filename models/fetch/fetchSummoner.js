@@ -1,7 +1,7 @@
 import fetch from 'node-fetch'
 import dotenv from 'dotenv'
 dotenv.config()
-const apiKey = 'RGAPI-ba965b44-04a1-495c-9df0-4afe45f57e51';
+const apiKey = process.env.RIOT_API_KEY;
 
 const fetchSummoner = async (summonerName) => {
     try {

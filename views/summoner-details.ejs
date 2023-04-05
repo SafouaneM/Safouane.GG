@@ -5,82 +5,80 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="../public/main.css">
-    <title><%summonerName %></title>
+    <link rel="stylesheet" href="/main.css">
+    <link rel="manifest" href="/manifest.json">
+    <title>
+        <% summonerName %>
+    </title>
 </head>
 <body>
-<% if (summonerName) { %>
-    <h1> <%= summonerName %></h1>
+<div class="flex items-center space-x-4">
+    <a href="/summoner" class="text-gray-800 hover:text-gray-500">Home</a>
+    <a href="/champions" class="text-gray-800 hover:text-gray-500">Champions</a>
+    <a href="/download" class="px-4 py-2 rounded-md bg-blue-500 text-white hover:bg-blue-600">Download</a>
+</div>
+<div class="container mx-auto px-4 py-8">
+    <% if (summonerName) { %>
+        <a href="/summoner" class="block mb-4 text-blue-600 hover:text-blue-800">Return</a>
+        <h1 class="text-3xl font-bold mb-4"><%= summonerName %></h1>
 
+        <div class="flex flex-col sm:flex-row space-y-6 sm:space-y-0 sm:space-x-6 mb-12">
+            <!-- Solo queue data -->
+            <div class="bg-gray-100 rounded-lg px-6 py-4 w-full sm:w-1/2">
+                <h2 class="text-xl font-bold mb-2">Solo Queue:</h2>
+                <p class="text-lg mb-1">Tier: <%= soloQueueData.tier %></p>
+                <p class="text-lg mb-1">LP: <%= soloQueueData.lp %></p>
+                <p class="text-lg mb-1">Results: <%= soloQueueData.results %></p>
+                <p class="text-lg mb-1">Win Rate: <%= soloQueueData.winRate %></p>
+            </div>
 
-    <h2>Solo Queue:</h2>
-    <p>Tier: <%= soloQueueData.tier %></p>
-    <p>LP: <%= soloQueueData.lp %></p>
-    <p>Results: <%= soloQueueData.results %></p>
-    <p>Win Rate: <%= soloQueueData.winRate %></p>
-
-    <h2>Flex Queue:</h2>
-    <p>Tier: <%= flexQueueData.tier %></p>
-    <p>LP: <%= flexQueueData.lp %></p>
-    <p>Results: <%= flexQueueData.results %></p>
-    <p>Win Rate: <%= flexQueueData.winRate %></p>
-
-
-    <% const champions = {}; %>
-    <% Object.keys(championData.data).forEach(key => { %>
-        <% champions[championData.data[key].key] = championData.data[key].name; %>
-    <% }); %>
-
-    <div class="champion-slider-style">
+            <!-- Flex queue data -->
+            <div class="bg-gray-100 rounded-lg px-6 py-4 w-full sm:w-1/2">
+                <h2 class="text-xl font-bold mb-2">Flex Queue:</h2>
+                <p class="text-lg mb-1">Tier: <%= flexQueueData.tier %></p>
+                <p class="text-lg mb-1">LP: <%= flexQueueData.lp %></p>
+                <p class="text-lg mb-1">Results: <%= flexQueueData.results %></p>
+                <p class="text-lg mb-1">Win Rate: <%= flexQueueData.winRate %></p>
+            </div>
+        </div>
+        <% const champions = {}; %>
+        <% Object.keys(championData.data).forEach(key => { %>
+            <% champions[championData.data[key].key] = championData.data[key].name; %>
+        <% }); %>
+        <!-- Champion mastery slider -->
+        <h2 class="text-2xl font-bold mb-4">Top Champions:</h2>
+    <div class="flex flex-wrap justify-center sm:justify-start">
         <% for (let i = 0; i < 6 && i < summonerMastery.length; i++) { %>
             <% const championId = summonerMastery[i].championId; %>
             <% const championName = champions[championId]; %>
-            <li class="single-champion-slider">
-                <a href="javascript:void(0);" onclick="displayChampionDetails('<%= summonerName %>', '<%= championId %>')">
-                    <img src="https://ddragon.leagueoflegends.com/cdn/11.20.1/img/champion/<%= getFilteredName(championName) %>.png" alt="<%= championName %>">
-                    <p><%= championName %></p>
-                    <div class="champion-details" id="champion-details">
+        <div class="flex flex-col items-center justify-center w-24 sm:w-32 mr-4 mb-4">
+            <a href="/champions/<%= championName %>" class="relative block">
+                <img src="https://ddragon.leagueoflegends.com/cdn/11.20.1/img/champion/<%= getFilteredName(championName) %>.png"
+                     alt="<%= championName %>" class="rounded-full w-24 h-24 sm:w-32 sm:h-32">
+            </a>
+            <div class="absolute bottom-0 left-0 w-full text-center font-bold text-white">
+                <p><%= championName %></p>
+            </div>
+            <% } %>
+        </div>
 
-                    </div>
-                </a>
-            </li>
         <% } %>
-    </div>
+        <script>
+
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function () {
+                    navigator.serviceWorker.register('/service-worker.js').then(function (registration) {
+                        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                    }, function (err) {
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+                });
+            }
 
 
-
-<% } %>
-<script>
-    async function displayChampionDetails(summonerName, championId) {
-        try {
-            const response = await fetch(`/api/summoner/${summonerName}/${championId}`);
-            const championDetails = await response.json();
-
-            document.getElementById("champion-details").innerHTML = `
-                <h2>${championDetails.championName}</h2>
-                <h3>${championDetails.championTitle}</h3>
-                <p>${championDetails.championBio}</p>
-            `;
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
-
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function() {
-            navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
-                console.log('ServiceWorker registration successful with scope: ', registration.scope);
-            }, function(err) {
-                console.log('ServiceWorker registration failed: ', err);
-            });
-        });
-    }
-
-
-
-</script>
-<script src="/service-worker.js"></script>
+        </script>
+        <script src="/service-worker.js"></script>
+        <script src="/registration.js"></script>
 
 </body>
 </html>

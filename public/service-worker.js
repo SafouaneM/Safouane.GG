@@ -1,5 +1,5 @@
 const CACHE_NAME = 'safouane.gg-cachingv2';
-
+console.log('hi')
 self.addEventListener('install', function (event) {
     console.log('Service worker installing...');
     event.waitUntil(
@@ -7,6 +7,7 @@ self.addEventListener('install', function (event) {
             return cache.addAll([
                 '/main.css',
                 '/summoner',
+                '/champions',
                 '/offline'
             ]);
         })

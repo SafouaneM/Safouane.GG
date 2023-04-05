@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="A summary of all the champions with some nice pagination for our users.">
+    <link rel="stylesheet" href="/main.css">
+    <link rel="manifest" href="/manifest.json">
+
+    <title>Champions</title>
+</head>
+
+<body class="bg-gray-200">
+<header class="bg-white shadow">
+    <nav class="container mx-auto px-6 py-3">
+        <div class="flex items-center justify-between">
+            <div class="text-gray-800 text-xl font-semibold">Safouane.GG</div>
+            <div class="flex items-center space-x-4">
+                <a href="/summoner" class="text-gray-800 hover:text-gray-500">Home</a>
+                <a href="/champions" class="text-gray-800 hover:text-gray-500">Champions</a>
+                <a href="/download" class="px-4 py-2 rounded-md bg-blue-800 text-white hover:bg-blue-900">Download</a>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="container mx-auto px-4 py-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        <% championsData.forEach(champion => { %>
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <a href="/champions/<%= champion.id %>">
+                    <img src="<%= champion.splash %>" alt="<%= champion.name %> Splash Art" class="w-full">
+                </a>
+                <div class="px-6 py-4">
+                    <div class="font-bold text-xl mb-2"><%= champion.name %></div>
+                    <p class="text-gray-700 text-base"><%= champion.title %></p>
+                    <p class="text-gray-600 text-sm mt-4"><%= champion.blurb %></p>
+                    <a href="/#">Read more...</a>
+                </div>
+            </div>
+        <% }); %>
+        <!-- Previous Button -->
+        <% if (page > 1) { %>
+            <a href="/champions?page=<%= page - 1 %>" class="btn btn-primary">Previous</a>
+        <% } else { %>
+            <a class="btn btn-primary disabled" href="#">Previous</a>
+        <% } %>
+
+        <!-- Next Button -->
+        <% if (page < totalPages) { %>
+            <a href="/champions?page=<%= page + 1 %>" class="btn btn-primary">Next</a>
+        <% } else { %>
+            <a class="btn btn-primary disabled" href="#">Next</a>
+        <% } %>
+
+    </div>
+</div>
+<script src="/registration.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="<%= championData.name  %> <%= championData.title  %> information.">
+    <link rel="stylesheet" href="/main.css">
+    <link rel="manifest" href="/manifest.json">
+    <title><%= championData.name  %> - Safouane.GG</title>
+</head>
+
+<body class="bg-gray-200">
+<header class="bg-white shadow">
+    <nav class="container mx-auto px-6 py-3">
+        <div class="flex items-center justify-between">
+            <div class="text-gray-800 text-xl font-semibold">Safouane.GG</div>
+            <div class="flex items-center space-x-4">
+                <a href="/summoner" class="text-gray-800 hover:text-gray-500">Home</a>
+                <a href="/champions" class="text-gray-800 hover:text-gray-500">Champions</a>
+                <a href="/download" class="px-4 py-2 rounded-md bg-blue-500 text-white hover:bg-blue-600">Download</a>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="container mx-auto px-4 py-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <img src="<%= championData.splash %>" alt="<%= championData.name %> Splash Art" class="w-full">
+        </div>
+        <div>
+            <h1 class="font-bold text-3xl mb-2"><%= championData.name %></h1>
+            <h2 class="text-gray-700 text-lg mb-2"><%= championData.title %></h2>
+            <p class="text-gray-600 text-base"><%= championData.lore %></p>
+            <ul class="mt-4 mb-4">
+                <h3>Abilities</h3>
+                <% championData.spells.forEach(spell => { %>
+                    <li class="text-gray-700 text-base"><%= spell.name %></li>
+                <% }); %>
+            </ul>
+            <a href="/champions" class="text-blue-500 hover:text-blue-700">Back to Champions</a>
+        </div>
+    </div>
+</div>
+<script src="/registration.js"></script>
+</body>
+
+</html>

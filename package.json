@@ -32,6 +32,7 @@
     "node-fetch": "^3.3.1",
     "postcss": "^8.4.21",
     "postcss-cli": "^10.1.0",
+    "postcss-watch": "^0.1.1",
     "tailwindcss": "^3.2.7"
   },
   "devDependencies": {
