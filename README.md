@@ -24,6 +24,7 @@ Outdated but still some relevant code if you're curious on how I started before 
 - [x] More consistent with the UI and make it more User friendly
 - [~] Autocomplete when you're looking for a summoner
 
+
 | Features                 | Progress    |
 | -----------              | ----------- |
 | Summoner search.         | [☑️].         
@@ -38,6 +39,33 @@ Outdated but still some relevant code if you're curious on how I started before 
 | Spectate match.          | [].          |
 | Drafting tool/simulator  | [].          |
 | Esports calendar         | [].          |
+
+
+## Activity Diagram
+![Screenshot 2023-04-05 at 23 37 28](https://user-images.githubusercontent.com/31611670/230217586-673ed756-38a1-44c5-98a2-0262b831b536.png)
+![Screenshot 2023-04-05 at 23 37 52](https://user-images.githubusercontent.com/31611670/230217649-b3525e26-05b6-4a9c-baae-2a071092c694.png)
+![Screenshot 2023-04-05 at 23 38 09](https://user-images.githubusercontent.com/31611670/230217716-45ced8d1-1f91-476c-90ef-458e12ea0c5c.png)
+![Screenshot 2023-04-05 at 22 17 44](https://user-images.githubusercontent.com/31611670/230200099-d96967e5-3ad4-42b8-adfc-8be7e7b0418d.png)
+
+## Control flow of the service worker
+1. Set the value of CACHE_NAME constant to 'safouane.gg-cachingv2'.
+2. Output hi to the console.
+3. Add an event listener for the install event:
+-  Output Service worker installing... to the console.
+-  Open the cache specified by CACHE_NAME.
+-  Add the files '/main.css', '/summoner', '/champions', and '/offline' to the cache.
+4. Add an event listener for the activate event:
+- Output Service worker activating... to the console.
+5. Add an event listener for the fetch event:
+- Output [Service Worker] Fetching... to the console.
+-  Try to find a match for the requested resource in the cache.
+-  If a match is found, return the cached response.
+-  If a match is not found, fetch the resource from the network:
+-  If the request method is not GET or the request URL does not start with http, return the response from the network.
+-  Otherwise, put the response in the cache and return the response from the network.
+-  If the fetch fails, return the cached /offline page.
+
+
 
 ## Assets:
 1. https://developer.riotgames.com/apis
