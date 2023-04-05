@@ -281,7 +281,7 @@ export const getSingleChampionData = async (id) => {
 }
 ```
 
-```text
+
 This code above exports two functions: getAllChampionsData and getSingleChampionData. These functions are used to fetch data for a list of all champions and a single champion respectively.
 
 The getAllChampionsData function takes in two parameters, pageSize and offset, which are used to slice the list of all champions returned by the fetchChampions() function, which is imported from the ./fetch/fetchChampions.js file. The function then maps over the sliced champions array, and for each champion, it extracts certain properties like the id, name, title, blurb, and splash image URL. The getFilteredName helper function is called to convert the champion's name into a format that can be used in the image URL. All of this data is then returned as an array of objects.
@@ -289,7 +289,7 @@ The getAllChampionsData function takes in two parameters, pageSize and offset, w
 The getSingleChampionData function takes in a single parameter, id, which represents the ID of the champion to be fetched. It calls the getFilteredName helper function to convert the id into the format required by the API endpoint. It then uses fetch to make a GET request to the endpoint, passing in the filtered name as part of the URL. The returned data is then parsed as JSON, and specific properties of the champion data are extracted and returned as an object, including the id, name, title, lore, splash image URL, and spells.
 
 This code relies on several helper functions and modules, including fetchChampions, getFilteredName, node-fetch, and the JSON object. These modules are imported at the top of the file using ES6 module syntax.
-```
+
 
 # The service worker logic in Safouane.GG and the Activity diagram
 
@@ -333,17 +333,28 @@ explain what I did to achieve a perfect score on the google lighthouse test (on 
 
 The home page didn't really have any content on it so the result of the first scan didn't really surprise me as there
 wasn't really something that could go wrong here
-![Screenshot 2023-04-03 at 18.56.01.png](..%2F..%2F..%2FDownloads%2FScreenshot%202023-04-03%20at%2018.56.01.png)
-![Screenshot 2023-04-04 at 13.36.15.png](..%2F..%2F..%2FDownloads%2FScreenshot%202023-04-04%20at%2013.36.15.png)
+
+![Screenshot 2023-04-06 at 01 36 20](https://user-images.githubusercontent.com/31611670/230236317-1194f12e-9d97-4a5e-96ae-d2a7a9dc9c6e.png)
+![Screenshot 2023-04-06 at 01 36 36](https://user-images.githubusercontent.com/31611670/230236338-bb311f83-9e3b-46fb-9502-ae23fcf84798.png)
+
+<img width="1436" alt="Screenshot 2023-04-04 at 13 37 34" src="https://user-images.githubusercontent.com/31611670/230236398-fd829f30-ff66-4aa5-b896-3fa064ba7953.png">
+
+
 
 On the other hand the champions page had some more troubles loading, as we were loading in 163 unique champions.
-![Screenshot 2023-04-06 at 00.51.02.png](..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fyg%2F49psmmj57mz9slvc180rpzr00000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_gnJZXi%2FScreenshot%202023-04-06%20at%2000.51.02.png)
+
+<img width="526" alt="Screenshot 2023-04-03 at 19 09 07" src="https://user-images.githubusercontent.com/31611670/230236428-909d0d12-102f-4812-89d3-34e8f8b274c5.png">
+
+
 So the main focus of our optimalisation was going to be here the /champions route.
-![Screenshot 2023-04-06 at 00.52.30.png](..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fyg%2F49psmmj57mz9slvc180rpzr00000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_McVtCC%2FScreenshot%202023-04-06%20at%2000.52.30.png)
+
+<img width="715" alt="Screenshot 2023-04-04 at 14 45 41" src="https://user-images.githubusercontent.com/31611670/230236416-bef9623d-18cc-44a4-ac70-fe396950e6c6.png">
+<img width="809" alt="Screenshot 2023-04-04 at 14 46 06" src="https://user-images.githubusercontent.com/31611670/230236405-073318e6-ac99-4b1f-85ee-6fc1d144bde7.png">
+
 It seems google had some trouble with our application images not having explicit width and heights, but we also had a
 very big problem the api only gives us one size of images. And these images are usually quite large, we don't want/need
 that for our small cards. As you can see here google didn't like us having big pictures all the time
-![Screenshot 2023-04-06 at 00.55.03.png](..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fyg%2F49psmmj57mz9slvc180rpzr00000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_BEzvxU%2FScreenshot%202023-04-06%20at%2000.55.03.png)
+<img width="692" alt="Screenshot 2023-04-04 at 15 07 14" src="https://user-images.githubusercontent.com/31611670/230236819-ebc0af9c-dd32-4ca4-8559-a28eec24b6fc.png">
 
 These are the steps I took to resolve this issue.
 
@@ -351,8 +362,10 @@ These are the steps I took to resolve this issue.
    read what I can do with it.
 2. Imgix had a service where you could replace the webfolder url with their endpoint so you can write query parameters
    to scale your images(more about that later) I tried it out and to my suprise it worked really easily and smooth
-   ![Screenshot 2023-04-06 at 00.58.59.png](..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fyg%2F49psmmj57mz9slvc180rpzr00000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_S1Hq0a%2FScreenshot%202023-04-06%20at%2000.58.59.png)
-   ![Screenshot 2023-04-06 at 00.59.14.png](..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fyg%2F49psmmj57mz9slvc180rpzr00000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_7nW12o%2FScreenshot%202023-04-06%20at%2000.59.14.png)
+  ![Screenshot 2023-04-06 at 01 39 44](https://user-images.githubusercontent.com/31611670/230236879-a23c3211-87b7-4db2-9bb1-d158051ba52d.png)
+
+  ![Screenshot 2023-04-06 at 01 40 01](https://user-images.githubusercontent.com/31611670/230236916-d70841c8-7550-4920-bba3-0c288ef3dddc.png)
+
 3. See the difference in the url? This discovery made me really enthuastic, so I went to see what else I could do with
    this api. But before that I changed the path of how I grabbed my splash arts from the api and now we were returning
 
@@ -361,7 +374,9 @@ splash: `https://champion-images.imgix.net/${filteredName}_0.jpg?w=580```
 ```
 
 After running the test we were now on the lighthouse tool we were on a
-![Screenshot 2023-04-06 at 01.03.04.png](..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fyg%2F49psmmj57mz9slvc180rpzr00000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_AarHGK%2FScreenshot%202023-04-06%20at%2001.03.04.png)
+
+<img width="1440" alt="Screenshot 2023-04-04 at 13 38 00" src="https://user-images.githubusercontent.com/31611670/230236994-3bdf882f-b061-4d65-acf3-dc27b92be444.png">
+
 96 score for the performance, so that was crazy good already. But how would we go to the 100
 
 5. I went to show my teacher my progress, and after getting flamed to oblivion about the fact that I was using
@@ -369,7 +384,10 @@ After running the test we were now on the lighthouse tool we were on a
    webp or avif. But fortuntatly this crazy api has the solution for that already look at these 2 query parameters &auto=compress&fm=webp or avif
 6. I found out that with the &fm=webp I could change EVERY picture to a webp image, but my teacher told me it was smarter to use fm=auto so that the browser decided what's best for the user. And compressing simply makes the image smaller without losing resolution
 7. After doing all that, and changing some meta data for example that zooming would be allowed in the application and that every page has a title google came to the conclusion to give me some beautiful fireworks:
-![Screenshot 2023-04-06 at 01.06.47.png](..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fyg%2F49psmmj57mz9slvc180rpzr00000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_vfDg5n%2FScreenshot%202023-04-06%20at%2001.06.47.png)
+
+<img width="743" alt="Screenshot 2023-04-04 at 15 15 48" src="https://user-images.githubusercontent.com/31611670/230237073-bef29a1d-b38a-42b9-9d64-569e928506da.png">
+<img width="755" alt="Screenshot 2023-04-04 at 14 18 19" src="https://user-images.githubusercontent.com/31611670/230237081-7c22501d-bc64-4d39-b402-014b65fa96f0.png">
+
 
 If you want to know more about this really cool api here's something cool to know.
 
@@ -389,8 +407,6 @@ Here's an example URL with these additional parameters:
 Note that the specific parameters you use may depend on the requirements of your application and the characteristics of the images you are working with.
 
 ---
-
-[data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%2730%27%20height=%2730%27/%3e](data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%2730%27%20height=%2730%27/%3e)
 
 Where can I find this?
 
