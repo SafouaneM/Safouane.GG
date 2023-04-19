@@ -18,6 +18,14 @@ application)
 
 ~ = In development
 
+Some chatgpt recommendations that I'll put in my application soon, because it's relevant to our next course (real-time-web)
+
+Live game data: Using the Spectator V4 API, you can retrieve real-time data about the current game a player is participating in. This data can include information about the players, their champions, their items, and their overall performance. You can display this data in your application to provide users with a real-time view of the game.
+
+Match data updates: Using the Match V5 API, you can retrieve real-time updates about a player's match as it progresses. This can include updates about events happening in the game, as well as updates about the player's performance. You can use this data to provide users with real-time feedback about their performance and how they can improve.
+
+Notification system: You can use real-time functionality to create a notification system that alerts users when certain events happen, such as when a player they follow begins a new game or achieves a certain milestone in their performance.
+
 ## Things that I'm working on now that are required
 
 - [x] Reworking the client side application to server side with Node.js & Express
@@ -26,6 +34,7 @@ application)
 - [x] Adding Fail states
 - [x] Responsive design
 - [x] More consistent with the UI and make it more User friendly
+- [~] More pleasing to look at design
 - [~] Autocomplete when you're looking for a summoner
 
 | Features                                          | Progress |
