@@ -18,13 +18,19 @@ application)
 
 ~ = In development
 
-Some chatgpt recommendations that I'll put in my application soon, because it's relevant to our next course (real-time-web)
+Some chatgpt recommendations that I'll put in my application soon, because it's relevant to our next course (
+real-time-web)
 
-Live game data: Using the Spectator V4 API, you can retrieve real-time data about the current game a player is participating in. This data can include information about the players, their champions, their items, and their overall performance. You can display this data in your application to provide users with a real-time view of the game.
+Live game data: Using the Spectator V4 API, you can retrieve real-time data about the current game a player is
+participating in. This data can include information about the players, their champions, their items, and their overall
+performance. You can display this data in your application to provide users with a real-time view of the game.
 
-Match data updates: Using the Match V5 API, you can retrieve real-time updates about a player's match as it progresses. This can include updates about events happening in the game, as well as updates about the player's performance. You can use this data to provide users with real-time feedback about their performance and how they can improve.
+Match data updates: Using the Match V5 API, you can retrieve real-time updates about a player's match as it progresses.
+This can include updates about events happening in the game, as well as updates about the player's performance. You can
+use this data to provide users with real-time feedback about their performance and how they can improve.
 
-Notification system: You can use real-time functionality to create a notification system that alerts users when certain events happen, such as when a player they follow begins a new game or achieves a certain milestone in their performance.
+Notification system: You can use real-time functionality to create a notification system that alerts users when certain
+events happen, such as when a player they follow begins a new game or achieves a certain milestone in their performance.
 
 ## Things that I'm working on now that are required
 
@@ -51,6 +57,30 @@ Notification system: You can use real-time functionality to create a notificatio
 | Spectate match.                                   | [].      |
 | Drafting tool/simulator                           | [].      |
 | Esports calendar                                  | [].      |
+
+### Ideas that I'm tinkering with right now
+
+We are going to create a way where users can register an account, after registering an account he/she will see data
+about their account as the summonerName that they provided will be used for their profile data. So they can see their
+top champions and some more I will implement the data display myself.
+
+After they’ve registered I want the users to be able to access a chat feature in realtime using socket.io. As I want to
+focus on learning the principles of real time web.
+
+The first thing users can do after creating an account is move to the main menu and post a message on the homepage, this
+could be anything the name that will be displayed is the summonerName they chose during registering their account. You
+can like or dislike somebody’s post and see how many minutes ago somebody posted a message.
+
+Next would be that users can create a custom chatroom with or without a password, other users can see the chatrooms and
+join the chatrooms if they want. And they should be able to chat in those chatrooms with each other, they can also click
+on each others profile to add them as a friend or send them a private message this still by using socket.io
+
+After this I’d like users to have the ability to use a new feature the Match Summoner feature, here users can write a
+small post with some filters on what they need in a partner be it rank elo gender etc. After they’ve written down this
+post, it gets displayed in the “Match Finder” tab and if somebody thinks hey this is the parter for me they can leave a
+private message or open a request to start a chatroom so they can duke it out there. It could also be that users might
+want to find teams, so requests like those could have a requirement of 5 people and then the chatroom locks off from
+other people stuff like that. I want to create the database management with mysql as I’m familiar with their use case.
 
 ### Installation
 
@@ -290,15 +320,23 @@ export const getSingleChampionData = async (id) => {
 }
 ```
 
+This code above exports two functions: getAllChampionsData and getSingleChampionData. These functions are used to fetch
+data for a list of all champions and a single champion respectively.
 
-This code above exports two functions: getAllChampionsData and getSingleChampionData. These functions are used to fetch data for a list of all champions and a single champion respectively.
+The getAllChampionsData function takes in two parameters, pageSize and offset, which are used to slice the list of all
+champions returned by the fetchChampions() function, which is imported from the ./fetch/fetchChampions.js file. The
+function then maps over the sliced champions array, and for each champion, it extracts certain properties like the id,
+name, title, blurb, and splash image URL. The getFilteredName helper function is called to convert the champion's name
+into a format that can be used in the image URL. All of this data is then returned as an array of objects.
 
-The getAllChampionsData function takes in two parameters, pageSize and offset, which are used to slice the list of all champions returned by the fetchChampions() function, which is imported from the ./fetch/fetchChampions.js file. The function then maps over the sliced champions array, and for each champion, it extracts certain properties like the id, name, title, blurb, and splash image URL. The getFilteredName helper function is called to convert the champion's name into a format that can be used in the image URL. All of this data is then returned as an array of objects.
+The getSingleChampionData function takes in a single parameter, id, which represents the ID of the champion to be
+fetched. It calls the getFilteredName helper function to convert the id into the format required by the API endpoint. It
+then uses fetch to make a GET request to the endpoint, passing in the filtered name as part of the URL. The returned
+data is then parsed as JSON, and specific properties of the champion data are extracted and returned as an object,
+including the id, name, title, lore, splash image URL, and spells.
 
-The getSingleChampionData function takes in a single parameter, id, which represents the ID of the champion to be fetched. It calls the getFilteredName helper function to convert the id into the format required by the API endpoint. It then uses fetch to make a GET request to the endpoint, passing in the filtered name as part of the URL. The returned data is then parsed as JSON, and specific properties of the champion data are extracted and returned as an object, including the id, name, title, lore, splash image URL, and spells.
-
-This code relies on several helper functions and modules, including fetchChampions, getFilteredName, node-fetch, and the JSON object. These modules are imported at the top of the file using ES6 module syntax.
-
+This code relies on several helper functions and modules, including fetchChampions, getFilteredName, node-fetch, and the
+JSON object. These modules are imported at the top of the file using ES6 module syntax.
 
 # The service worker logic in Safouane.GG and the Activity diagram
 
@@ -371,9 +409,9 @@ These are the steps I took to resolve this issue.
    read what I can do with it.
 2. Imgix had a service where you could replace the webfolder url with their endpoint so you can write query parameters
    to scale your images(more about that later) I tried it out and to my suprise it worked really easily and smooth
-  ![Screenshot 2023-04-06 at 01 39 44](https://user-images.githubusercontent.com/31611670/230236879-a23c3211-87b7-4db2-9bb1-d158051ba52d.png)
+   ![Screenshot 2023-04-06 at 01 39 44](https://user-images.githubusercontent.com/31611670/230236879-a23c3211-87b7-4db2-9bb1-d158051ba52d.png)
 
-  ![Screenshot 2023-04-06 at 01 40 01](https://user-images.githubusercontent.com/31611670/230236916-d70841c8-7550-4920-bba3-0c288ef3dddc.png)
+![Screenshot 2023-04-06 at 01 40 01](https://user-images.githubusercontent.com/31611670/230236916-d70841c8-7550-4920-bba3-0c288ef3dddc.png)
 
 3. See the difference in the url? This discovery made me really enthuastic, so I went to see what else I could do with
    this api. But before that I changed the path of how I grabbed my splash arts from the api and now we were returning
@@ -390,9 +428,13 @@ After running the test we were now on the lighthouse tool we were on a
 
 5. I went to show my teacher my progress, and after getting flamed to oblivion about the fact that I was using
    TailwindCSS it was time to look for the problem. It seems we needed to convert the images to a modern image type, so
-   webp or avif. But fortuntatly this crazy api has the solution for that already look at these 2 query parameters &auto=compress&fm=webp or avif
-6. I found out that with the &fm=webp I could change EVERY picture to a webp image, but my teacher told me it was smarter to use fm=auto so that the browser decided what's best for the user. And compressing simply makes the image smaller without losing resolution
-7. After doing all that, and changing some meta data for example that zooming would be allowed in the application and that every page has a title google came to the conclusion to give me some beautiful fireworks:
+   webp or avif. But fortuntatly this crazy api has the solution for that already look at these 2 query parameters
+   &auto=compress&fm=webp or avif
+6. I found out that with the &fm=webp I could change EVERY picture to a webp image, but my teacher told me it was
+   smarter to use fm=auto so that the browser decided what's best for the user. And compressing simply makes the image
+   smaller without losing resolution
+7. After doing all that, and changing some meta data for example that zooming would be allowed in the application and
+   that every page has a title google came to the conclusion to give me some beautiful fireworks:
 
 <img width="743" alt="Screenshot 2023-04-04 at 15 15 48" src="https://user-images.githubusercontent.com/31611670/230237073-bef29a1d-b38a-42b9-9d64-569e928506da.png">
 <img width="755" alt="Screenshot 2023-04-04 at 14 18 19" src="https://user-images.githubusercontent.com/31611670/230237081-7c22501d-bc64-4d39-b402-014b65fa96f0.png">
@@ -402,18 +444,26 @@ If you want to know more about this really cool api here's something cool to kno
 
 To format an image to webp, you can add "&fm=webp" to the end of the URL, like this:
 
-**[https://champion-images.imgix.net/Akshan_0.jpg?w=500&auto=compress&fm=webp](https://champion-images.imgix.net/Akshan_0.jpg?w=500&auto=compress&fm=webp)**
+*
+*[https://champion-images.imgix.net/Akshan_0.jpg?w=500&auto=compress&fm=webp](https://champion-images.imgix.net/Akshan_0.jpg?w=500&auto=compress&fm=webp)
+**
 
-This will tell Imgix to convert the image to the webp format. Additionally, you might want to consider adding other parameters to further optimize the image for web delivery, such as:
+This will tell Imgix to convert the image to the webp format. Additionally, you might want to consider adding other
+parameters to further optimize the image for web delivery, such as:
 
-- q: This parameter sets the quality of the image. For webp images, a quality value of 75 is a good balance between file size and image quality.
-- dpr: This parameter sets the device pixel ratio, which can improve the image quality on high-density displays. A value of 2 or 3 is common for modern devices.
+- q: This parameter sets the quality of the image. For webp images, a quality value of 75 is a good balance between file
+  size and image quality.
+- dpr: This parameter sets the device pixel ratio, which can improve the image quality on high-density displays. A value
+  of 2 or 3 is common for modern devices.
 
 Here's an example URL with these additional parameters:
 
-**[https://champion-images.imgix.net/Akshan_0.jpg?w=500&auto=compress&fm=webp&q=75&dpr=2](https://champion-images.imgix.net/Akshan_0.jpg?w=500&auto=compress&fm=webp&q=75&dpr=2)**
+*
+*[https://champion-images.imgix.net/Akshan_0.jpg?w=500&auto=compress&fm=webp&q=75&dpr=2](https://champion-images.imgix.net/Akshan_0.jpg?w=500&auto=compress&fm=webp&q=75&dpr=2)
+**
 
-Note that the specific parameters you use may depend on the requirements of your application and the characteristics of the images you are working with.
+Note that the specific parameters you use may depend on the requirements of your application and the characteristics of
+the images you are working with.
 
 ---
 
@@ -428,7 +478,9 @@ Here are some relevant links:
 3. Quality parameter: **[https://docs.imgix.com/apis/url/format/q](https://docs.imgix.com/apis/url/format/q)**
 4. Device pixel ratio parameter: **[https://docs.imgix.com/apis/url/dpr](https://docs.imgix.com/apis/url/dpr)**
 
-The documentation website provides detailed explanations of all of the parameters that you can use with the Imgix API, along with code samples and best practices for optimizing image delivery. It's a great resource for learning how to make the most of the Imgix platform.
+The documentation website provides detailed explanations of all of the parameters that you can use with the Imgix API,
+along with code samples and best practices for optimizing image delivery. It's a great resource for learning how to make
+the most of the Imgix platform.
 
 ## Assets:
 
