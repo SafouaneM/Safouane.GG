@@ -26,9 +26,11 @@
   "homepage": "https://github.com/SafouaneM/progressive-web-apps-2223#readme",
   "dependencies": {
     "autoprefixer": "^10.4.14",
+    "bcrypt": "^5.1.0",
     "dotenv": "^16.0.3",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
+    "express-session": "^1.17.3",
     "mysql2": "^3.2.3",
     "node-fetch": "^3.3.1",
     "postcss": "^8.4.21",
