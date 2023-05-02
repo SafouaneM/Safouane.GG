@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,7 +10,6 @@
     <link rel="manifest" href="/manifest.json">
     <script defer src="/service-worker.js"></script>
 </head>
-
 <body class="bg-gray-100 flex flex-col min-h-screen">
 <div id="loadingBar" class="hidden w-full h-1 bg-yellow-500 animate-loading"></div>
 <header class="bg-white shadow">
@@ -21,33 +20,48 @@
                 <a href="/summoner" class="text-gray-800 hover:text-gray-500">Home</a>
                 <a href="/champions" class="text-gray-800 hover:text-gray-500">Champions</a>
                 <a href="/download" class="px-4 py-2 rounded-md bg-blue-500 text-white hover:bg-blue-600">Download</a>
-                <% if (user) { %>
-                    <a class="text-gray-800 hover:text-gray-500" href="/dashboard">Profile (<%= user.nickname %>)</a>
-                    <a class="text-gray-800 hover:text-gray-500" href="/logout">Logout</a>
-                <% } else { %>
-                    <a class="text-gray-800 hover:text-gray-500" href="/login">Login</a>
-                    <a class="text-gray-800 hover:text-gray-500" href="/register">Register</a>
-                <% } %>
+                <h1>Welcome <%= username %>!</h1>
             </div>
         </div>
     </nav>
 </header>
 
-<main class="container mx-auto px-6 py-20 flex-grow">
-    <div class="flex flex-col items-center">
-        <h1 class="text-4xl font-bold mb-6">SAFOUANE.GG</h1>
-        <form id="summoner-form" action="/summoner" method="POST" class="w-full max-w-md">
-            <div class="flex items-center border-b border-b-2 border-teal-500 py-2">
-                <input name="summonerName" type="text" placeholder="Enter summoner name"
-                       class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none">
-                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    Search
-                </button>
-            </div>
-        </form>
+<main class="">
+    <% if (summonerName) { %>
+        <p>Your registered summoner name is: <%= summonerName %></p>
+    <% } else { %>
+        <p>Please add your summoner name in the <a href="/profile">Profile</a> page.</p>
+    <% } %>
+    <div>
+        <h2>Solo Queue:</h2>
+        <p>Tier: <%= summonerData.rank.solo.tier %></p>
+        <p>LP: <%= summonerData.rank.solo.lp %></p>
     </div>
+    <div>
+        <h2>Flex Queue:</h2>
+        <p>Tier: <%= summonerData.rank.flex.tier %></p>
+        <p>LP: <%= summonerData.rank.flex.lp %></p>
+    </div>
+        <% const champions = {}; %>
+        <% Object.keys(championData.data).forEach(key => { %>
+            <% champions[championData.data[key].key] = championData.data[key].name; %>
+        <% }); %>
+        <div class="flex flex-wrap justify-center sm:justify-start">
+            <% for (let i = 0; i < 6 && i < summonerMastery.length; i++) { %>
+                <% const championId = summonerMastery[i].championId; %>
+                <% const championName = champions[championId]; %>
+                <div class="flex flex-col items-center justify-center w-24 sm:w-32 mr-4 mb-4">
+                    <a href="/champions/<%= championName %>" class="relative block">
+                        <img src="https://ddragon.leagueoflegends.com/cdn/11.20.1/img/champion/<%= getFilteredName(championName) %>.png"
+                             alt="<%= championName %>" class="rounded-full w-24 h-24 sm:w-32 sm:h-32">
+                    </a>
+                    <div class="absolute bottom-0 left-0 w-full text-center font-bold text-white">
+                        <p><%= championName %></p>
+                    </div>
+                </div>
+            <% } %>
+        </div>
 </main>
-
 
 <footer class="bg-white shadow mt-12 ">
     <div class="container mx-auto px-6 py-3 flex justify-between items-center ">
@@ -59,9 +73,5 @@
         </div>
     </div>
 </footer>
-<script src="/js/loadingState.js"></script>
-<script src="/registration.js"></script>
-
-
 </body>
 </html>

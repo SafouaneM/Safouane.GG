@@ -7,7 +7,7 @@ import getFilteredName from "./helpers/getFilteredName.js";
 
 export const getSummonerData = async (req, res) => {
     const summonerName = req.params.summonerName;
-    const loadingState = req.query.loadingState === 'true'
+    const loadingState = req.query.loadingState === 'true';
 
     try {
         const summoner = await fetchSummoner(summonerName);
@@ -21,15 +21,12 @@ export const getSummonerData = async (req, res) => {
         const summonerMastery = await fetchMasteryBySummonerId(summonerId);
         const championData = await fetchChampions();
 
-        console.log('correct data',championData)
-
         const summonerElo = await fetchElo(summonerId);
 
         const soloQueueData = getQueueData(summonerElo, "RANKED_SOLO_5x5");
         const flexQueueData = getQueueData(summonerElo, "RANKED_FLEX_SR");
 
-
-        res.render("summoner-details", {
+        return {
             summonerName: summoner.name,
             summonerLevel: summoner.summonerLevel,
             summonerIconId: summoner.profileIconId,
@@ -39,7 +36,7 @@ export const getSummonerData = async (req, res) => {
             championData: championData,
             loadingState: loadingState,
             getFilteredName: getFilteredName,
-        });
+        };
     } catch (error) {
         console.error(error);
         res.status(500).render("error", { message: "Error retrieving summoner data" });

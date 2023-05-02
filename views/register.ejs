@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="/main.css">
+</head>
+<body>
+<form method="POST" action="/register" class="max-w-sm mx-auto mt-6">
+    <p>hopelijk werkt dit!</p>
+    <div class="mb-4">
+        <label for="username" class="block text-gray-700 font-bold mb-2">Username: *</label>
+        <input type="text" id="username" name="nickname" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+    </div>
+    <div class="mb-4">
+        <label for="email" class="block text-gray-700 font-bold mb-2">Email: *</label>
+        <input type="email" id="email" name="email" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+    </div>
+    <div class="mb-4">
+        <label for="summoner_name" class="block text-gray-700 font-bold mb-2">Summoner Name:</label>
+        <input type="text" id="summoner_name" name="summoner_name"  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+    </div>
+    <div class="mb-4">
+        <label for="discord_tag" class="block text-gray-700 font-bold mb-2">Discord tag:</label>
+        <input type="text" id="discord_tag" name="discord_tag"  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+    </div>
+    <div class="mb-4">
+        <label for="password" class="block text-gray-700 font-bold mb-2">Password: *</label>
+        <input type="password" id="password" name="password" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+    </div>
+    <div class="mb-6">
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Register</button>
+    </div>
+</form>
+
+</body>
+</html>

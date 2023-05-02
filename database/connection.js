@@ -4,13 +4,12 @@ import dotenv from 'dotenv'
 
 dotenv.config()
 
-const pool = mysql.createPool({ //a connection to a connection to the database
+export const pool = mysql.createPool({ //a connection to a connection to the database
     host: process.env.DB_HOST,
     user: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE
 }).promise()
-
 
 
 async function getUsers() {
