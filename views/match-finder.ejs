@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+          content="Safouane.gg the ultimate experience to see information about yourself and some small data behind your favorite champions.">
+    <link rel="stylesheet" href="/main.css">
+    <title>Safouane.GG - Chat Main Menu</title>
+</head>
+<body class="bg-gray-100 flex flex-col min-h-screen">
+<header class="bg-white shadow">
+    <nav class="container mx-auto px-6 py-3">
+        <div class="flex items-center justify-between">
+            <div class="text-gray-800 text-xl font-semibold">Safouane.GG</div>
+            <div class="flex items-center space-x-4">
+                <a href="/summoner" class="text-gray-800 hover:text-gray-500">Home</a>
+                <a href="/champions" class="text-gray-800 hover:text-gray-500">Champions</a>
+            </div>
+        </div>
+    </nav>
+</header>
+<main class="bg-gray-200 flex justify-center min-h-screen py-4">
+    <div class="max-w-screen-lg w-full">
+        <div class="flex">
+            <div class="bg-white border rounded-lg mr-4 px-4 py-6 shadow-md w-1/4">
+                <h2 class="font-bold mb-4 text-lg">Private Chats</h2>
+                <!-- Private chat blocks will be added here -->
+            </div>
+            <div class="bg-white border rounded-lg flex-1 px-4 py-6 shadow-md">
+                <h2 class="font-bold mb-4 text-lg">Messages</h2>
+                <form id="messageForm" class="mb-4 transition duration-300">
+                    <input type="hidden" id="userId" value="<%= user.id %>">
+                    <input id="messageInput" class="border rounded px-3 py-2 w-full" type="text" placeholder="Type your message...">
+                    <div class="flex items-center mb-2">
+                        <input type="checkbox" id="nsfw" name="nsfw" value="true">
+                        <label for="nsfw" class="ml-1">NSFW</label>
+                    </div>
+                    <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white rounded px-4 py-2">Send</button>
+                </form>
+
+                <div id="messages" class="bg-white border rounded-lg p-4">
+                    <% if (posts.length === 0) { %>
+                        <div class="text-center py-4 text-gray-700">
+                            No posts yet.
+                        </div>
+                    <% } else { %>
+                        <% posts.forEach(post => { %>
+                            <div class="border-b pb-2 mb-2 flex items-start">
+                                <a href="#" data-userid="<%= post.user_id %>">
+                                    <img src="http://ddragon.leagueoflegends.com/cdn/13.3.1/img/profileicon/<%= post.summonerIconId %>.png" alt="<%= post.nickname %>" class="rounded-full w-12 h-12 object-contain">
+                                </a>
+                                <div class="ml-4 flex-1">
+                                    <div class="flex justify-between items-center">
+                                        <p class="text-gray-700 font-bold"><%= post.nickname %></p>
+                                        <p class="text-xs text-gray-500"><%= new Date(post.created_at).toLocaleString() %></p>
+                                    </div>
+                                    <p class='<%= post.user_id === user.id ? "leading-snug" : "leading-snug bg-blue-100" %>'><%= post.message %></p>
+                                </div>
+                            </div>
+                            <% }) %>
+                        <% } %>
+                </div>
+            </div>
+            <div class="bg-white border rounded-lg ml-4 px-4 py-6 shadow-md w-1/4">
+                <h2 class="font-bold mb-4 text-lg">User Information</h2>
+                <!-- User information will be added here -->
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    const socket = io();
+
+    document.getElementById('messageForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const userId = document.getElementById('userId').value;
+        const messageInput = document.getElementById('messageInput');
+        const message = messageInput.value;
+        const nsfw = document.getElementById('nsfw').checked;
+        messageInput.value = '';
+
+        socket.emit('postMessage', { userId, message, nsfw });
+    });
+
+    socket.on('newMessage', (msg) => {
+        const messagesContainer = document.getElementById('messages');
+        const messageElement = document.createElement('div');
+        messageElement.classList.add('border-b', 'pb-2', 'mb-2', 'flex', 'items-start');
+        messageElement.innerHTML = `
+        <a href="#" class="openPrivateChat" data-userid="${msg.userId}">
+            <img src="http://ddragon.leagueoflegends.com/cdn/13.3.1/img/profileicon/${msg.summonerIconId}.png" alt="${msg.nickname}" class="rounded-full w-12 h-12">
+        </a>
+        <div class="ml-4">
+            <p class="font-bold">${msg.nickname}</p>
+            <p>${msg.message}</p>
+        </div>
+    `;
+        messagesContainer.appendChild(messageElement);
+    });
+
+</script>
+</body>
+</html>
+
+

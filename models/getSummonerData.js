@@ -42,3 +42,22 @@ export const getSummonerData = async (req, res) => {
         res.status(500).render("error", { message: "Error retrieving summoner data" });
     }
 };
+
+export const getSummonerIconInfoBySummonerName = async (summonerName) => {
+    try {
+        const summoner = await fetchSummoner(summonerName);
+
+        if (!summoner) {
+            console.error('Error: summonerName does not exist');
+            return null;
+        }
+
+        return {
+            summonerName: summoner.name,
+            summonerIconId: summoner.profileIconId
+        };
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
+};

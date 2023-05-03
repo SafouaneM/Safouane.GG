@@ -1,21 +1,25 @@
-// import express from 'express'
-// const app = express();
-//
-// import summonerRoutes from './routes/summoners/summonerRoutes.js'
-// import expressLayouts from "express-ejs-layouts";
-//
-// import { URL } from 'url'; // in Browser, the URL in native accessible on window
-// const __dirname = new URL('.', import.meta.url).pathname;
-//
-//
-// app.use('/css', express.static(__dirname + 'public/css'))
-//
-// app.use(expressLayouts)
-// app.set('view engine', 'ejs')
-//
-// app.get('', (req,res) => {
-//     res.render('index')
-// })
-// app.use(summonerRoutes);
-//
-// export default app
+import express from 'express';
+import cookieParser from 'cookie-parser';
+import session from 'express-session';
+import dotenv from 'dotenv'
+dotenv.config()
+
+const app = express();
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static('public'));
+
+app.use(
+    session({
+        secret: process.env.SESSION_SECRET,
+        resave: false,
+        saveUninitialized: false,
+        cookie: { maxAge: 24 * 60 * 60 * 1000 },
+    })
+);
+
+app.set('view engine', 'ejs');
+
+export default app;
