@@ -6,104 +6,104 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
           content="Safouane.gg the ultimate experience to see information about yourself and some small data behind your favorite champions.">
+
     <link rel="stylesheet" href="/main.css">
     <title>Safouane.GG - Chat Main Menu</title>
 </head>
-<body class="bg-gray-100 flex flex-col min-h-screen">
+
+<body class="flex min-h-screen flex-col bg-gray-100">
 <header class="bg-white shadow">
     <nav class="container mx-auto px-6 py-3">
         <div class="flex items-center justify-between">
-            <div class="text-gray-800 text-xl font-semibold">Safouane.GG</div>
+            <div class="text-xl font-semibold text-gray-800">Safouane.GG</div>
             <div class="flex items-center space-x-4">
                 <a href="/summoner" class="text-gray-800 hover:text-gray-500">Home</a>
                 <a href="/champions" class="text-gray-800 hover:text-gray-500">Champions</a>
+                <a href="/summoner" class="text-gray-800 hover:text-gray-500">Match finder</a>
             </div>
         </div>
     </nav>
 </header>
-<main class="bg-gray-200 flex justify-center min-h-screen py-4">
-    <div class="max-w-screen-lg w-full">
-        <div class="flex">
-            <div class="bg-white border rounded-lg mr-4 px-4 py-6 shadow-md w-1/4">
-                <h2 class="font-bold mb-4 text-lg">Private Chats</h2>
-                <!-- Private chat blocks will be added here -->
+<main class="container mx-auto px-6 py-3">
+    <div class="flex flex-row">
+        <div class="w-1/4 pr-3">
+            <div class="flex flex-col space-y-4 rounded-md bg-gray-100 p-4 pr-5 shadow-lg">
+                <p>What do you want to do?</p>
+                <button class="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-800">Create Room</button>
+                <button class="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600">View Rooms</button>
+                <button class="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600">Match finder</button>
+                <button class="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600">Dark/Light mode</button>
+                <button class="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600">Users</button>
             </div>
-            <div class="bg-white border rounded-lg flex-1 px-4 py-6 shadow-md">
-                <h2 class="font-bold mb-4 text-lg">Messages</h2>
-                <form id="messageForm" class="mb-4 transition duration-300">
-                    <input type="hidden" id="userId" value="<%= user.id %>">
-                    <input id="messageInput" class="border rounded px-3 py-2 w-full" type="text" placeholder="Type your message...">
-                    <div class="flex items-center mb-2">
-                        <input type="checkbox" id="nsfw" name="nsfw" value="true">
-                        <label for="nsfw" class="ml-1">NSFW</label>
-                    </div>
-                    <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white rounded px-4 py-2">Send</button>
-                </form>
-
-                <div id="messages" class="bg-white border rounded-lg p-4">
-                    <% if (posts.length === 0) { %>
-                        <div class="text-center py-4 text-gray-700">
-                            No posts yet.
-                        </div>
-                    <% } else { %>
-                        <% posts.forEach(post => { %>
-                            <div class="border-b pb-2 mb-2 flex items-start">
-                                <a href="#" data-userid="<%= post.user_id %>">
-                                    <img src="http://ddragon.leagueoflegends.com/cdn/13.3.1/img/profileicon/<%= post.summonerIconId %>.png" alt="<%= post.nickname %>" class="rounded-full w-12 h-12 object-contain">
-                                </a>
-                                <div class="ml-4 flex-1">
-                                    <div class="flex justify-between items-center">
-                                        <p class="text-gray-700 font-bold"><%= post.nickname %></p>
-                                        <p class="text-xs text-gray-500"><%= new Date(post.created_at).toLocaleString() %></p>
-                                    </div>
-                                    <p class='<%= post.user_id === user.id ? "leading-snug" : "leading-snug bg-blue-100" %>'><%= post.message %></p>
+        </div>
+        <div class="w-3/4">
+            <div class="rounded-md bg-white p-4 shadow-lg">
+                <div class="flex items-center space-x-4">
+                    <img class="h-10 w-10 rounded-full"
+                         src="http://ddragon.leagueoflegends.com/cdn/13.3.1/img/profileicon/<%= user.summonerIconId %>.png"
+                         alt="Profile picture"/>
+                    <div class="flex-1">
+                        <form id="messageForm">
+                            <input type="hidden" id="userId" value="<%= user.id %>">
+                            <textarea id="messageInput"
+                                      class="h-20 w-full resize-none rounded-md border border-gray-300 p-2 focus:border-blue-500"
+                                      placeholder="What's happening?" maxlength="280"></textarea>
+                            <div class="mt-2 flex items-center justify-between">
+                                <div>
+                                    <button class="rounded bg-blue-500 px-3 py-1 text-white hover:bg-blue-600"
+                                            type="submit">Post
+                                    </button>
+                                    <input type="checkbox" id="nsfw" name="nsfw" value="true">
+                                    <label for="nsfw" class="ml-1">NSFW</label>
                                 </div>
+                                <div class="text-sm text-gray-500"><span class="tweet-length">0</span>/280</div>
                             </div>
-                            <% }) %>
-                        <% } %>
+                        </form>
+                    </div>
                 </div>
-            </div>
-            <div class="bg-white border rounded-lg ml-4 px-4 py-6 shadow-md w-1/4">
-                <h2 class="font-bold mb-4 text-lg">User Information</h2>
-                <!-- User information will be added here -->
+                <i class="fa-regular fa-thumbs-up"></i><i class="fa-regular fa-thumbs-up"></i><i class="fa-regular fa-thumbs-up"></i>
+                <div class="relative flex items-center py-5">
+                    <div class="flex-grow border-t border-gray-400"></div>
+                    <span class="mx-4 flex-shrink text-gray-400">Messages</span>
+                    <div class="flex-grow border-t border-gray-400"></div>
+                </div>
+                <div class="mt-4 grid grid-cols-2 grid-rows-2 gap-4">
+                    <div class="col-span-2 row-span-2">
+                        <div class="space-y-4" id="messages">
+                            <% if (posts.length === 0) { %>
+                                <div class="text-center py-4 text-gray-700">
+                                    No posts yet.
+                                </div>
+                            <% } else { %>
+                                <% posts.forEach(post => { %>
+                                    <div class="flex items-center space-x-4">
+                                        <img class="h-10 w-10 rounded-full"
+                                             src="http://ddragon.leagueoflegends.com/cdn/13.3.1/img/profileicon/<%= post.summonerIconId %>.png"
+                                             alt="<%= post.nickname %>"/>
+                                        <div>
+                                            <div class="font-bold"><%= post.nickname %> A.K.A <span
+                                                        class="text-gray-500"><%= post.summonerName %></span></div>
+                                            <p class="text-xs text-gray-500"><%= new Date(post.created_at).toLocaleString() %></p>
+                                            <p class="text-gray-700"><%= post.message %></p>
+                                        </div>
+                                        <button class="like-button focus:outline-none" data-post-id="<%= post.id %>">
+                                            <span class="<%= post.user_liked ? 'text-blue-500' : 'text-gray-500' %>">⭐️</span>
+                                        </button>
+                                        <span class="like-counter text-xs"><%= post.like_count > 0 ? post.like_count : '' %></span>
+                                    </div>
+                                <% }) %>
+                            <% } %>
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </main>
-
-<script src="/socket.io/socket.io.js"></script>
-<script>
-    const socket = io();
-
-    document.getElementById('messageForm').addEventListener('submit', (e) => {
-        e.preventDefault();
-        const userId = document.getElementById('userId').value;
-        const messageInput = document.getElementById('messageInput');
-        const message = messageInput.value;
-        const nsfw = document.getElementById('nsfw').checked;
-        messageInput.value = '';
-
-        socket.emit('postMessage', { userId, message, nsfw });
-    });
-
-    socket.on('newMessage', (msg) => {
-        const messagesContainer = document.getElementById('messages');
-        const messageElement = document.createElement('div');
-        messageElement.classList.add('border-b', 'pb-2', 'mb-2', 'flex', 'items-start');
-        messageElement.innerHTML = `
-        <a href="#" class="openPrivateChat" data-userid="${msg.userId}">
-            <img src="http://ddragon.leagueoflegends.com/cdn/13.3.1/img/profileicon/${msg.summonerIconId}.png" alt="${msg.nickname}" class="rounded-full w-12 h-12">
-        </a>
-        <div class="ml-4">
-            <p class="font-bold">${msg.nickname}</p>
-            <p>${msg.message}</p>
-        </div>
-    `;
-        messagesContainer.appendChild(messageElement);
-    });
-
-</script>
 </body>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/messages-matchfinder.js" type="module"></script>
 </html>
 
 

@@ -46,7 +46,7 @@ io.on('connection', (socket) => {
         const userId = msgData.userId;
         const isNsfw = msgData.nsfw;
         const isLiked = false; // Default value
-        await pool.query('INSERT INTO posts (user_id, message, nsfw, is_liked) VALUES (?, ?, ?, ?)', [userId, msgData.message, isNsfw, isLiked]);
+        await pool.query('INSERT INTO posts (user_id, message, nsfw) VALUES (?, ?, ?)', [userId, msgData.message, isNsfw]);
 
         const [userRows] = await pool.query('SELECT nickname, summoner_name FROM users WHERE id = ?', [userId]);
         const user = userRows[0];
@@ -60,6 +60,24 @@ io.on('connection', (socket) => {
         } else {
             console.error('Error: Could not fetch summonerIcon');
         }
+    });
+
+
+    socket.on('toggleLike', async ({ postId, userId }) => {
+        const [rows] = await pool.query('SELECT * FROM post_likes WHERE user_id = ? AND post_id = ?', [userId, postId]);
+
+        if (rows.length > 0) {
+            // If the user has liked the post, remove the like
+            await pool.query('DELETE FROM post_likes WHERE user_id = ? AND post_id = ?', [userId, postId]);
+        } else {
+            // If the user has not liked the post, add the like
+            await pool.query('INSERT INTO post_likes (user_id, post_id) VALUES (?, ?)', [userId, postId]);
+        }
+
+        const [newLikeCountRows] = await pool.query('SELECT COUNT(*) as newLikeCount FROM post_likes WHERE post_id = ?', [postId]);
+        const newLikeCount = newLikeCountRows[0].newLikeCount;
+
+        io.emit('likeToggled', { postId: postId, userId: userId, likeCount: newLikeCount });
     });
 
 
