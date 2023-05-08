@@ -8,7 +8,7 @@
           content="Safouane.gg the ultimate experience to see information about yourself and some small data behind your favorite champions.">
 
     <link rel="stylesheet" href="/main.css">
-    <title>Safouane.GG - Chat Room <% roomId%>></title>
+    <title>Safouane.GG - Rooms</title>
 </head>
 
 <body class="flex min-h-screen flex-col bg-gray-100">
@@ -36,77 +36,81 @@
                 <button id="createRoomButton" class="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-800">Create
                     Room
                 </button>
-                <a href="/rooms" class="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600">View Rooms</a>
+                <button class="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600">View Rooms</button>
                 <button class="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600">Match finder</button>
                 <button class="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600">Dark/Light mode</button>
                 <button class="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600">Users</button>
             </div>
         </div>
         <div class="w-3/4">
-            <div class="rounded-md bg-white p-4 shadow-lg">
-                <div class="flex items-center space-x-4">
-                    <img class="h-10 w-10 rounded-full"
-                         src="http://ddragon.leagueoflegends.com/cdn/13.3.1/img/profileicon/<%= user.summonerIconId %>.png"
-                         alt="Profile picture"/>
-                    <div class="flex-1">
-                        <form id="messageForm">
-                            <input type="hidden" id="userId" value="<%= user.id %>">
-                            <input type="hidden" id="roomId" value="<%= roomId %>">
-                            <textarea id="messageInput"
-                                      class="h-20 w-full resize-none rounded-md border border-gray-300 p-2 focus:border-blue-500"
-                                      placeholder="What's happening?" maxlength="280"></textarea>
-                            <div class="mt-2 flex items-center justify-between">
-                                <div>
-                                    <button class="rounded bg-blue-500 px-3 py-1 text-white hover:bg-blue-600"
-                                            type="submit">Post
-                                    </button>
-                                    <input type="checkbox" id="nsfw" name="nsfw" value="true">
-                                    <label for="nsfw" class="ml-1">NSFW</label>
-                                </div>
-                                <div class="text-sm text-gray-500"><span class="tweet-length">0</span>/280</div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <i class="fa-regular fa-thumbs-up"></i><i class="fa-regular fa-thumbs-up"></i><i
-                        class="fa-regular fa-thumbs-up"></i>
-                <div class="relative flex items-center py-5">
-                    <div class="flex-grow border-t border-gray-400"></div>
-                    <span class="mx-4 flex-shrink text-gray-400">Messages</span>
-                    <div class="flex-grow border-t border-gray-400"></div>
-                </div>
-                <div class="mt-4 grid grid-cols-2 grid-rows-2 gap-4">
-                    <div class="col-span-2 row-span-2">
-                        <div class="space-y-4" id="messages">
-                            <% if (posts.length === 0) { %>
-                                <div class="text-center py-4 text-gray-700">
-                                    No posts yet.
-                                </div>
-                            <% } else { %>
-                                <% posts.forEach(post => { %>
-                                    <div class="flex items-center space-x-4">
-                                        <img class="h-10 w-10 rounded-full"
-                                             src="http://ddragon.leagueoflegends.com/cdn/13.3.1/img/profileicon/<%= post.summonerIconId %>.png"
-                                             alt="<%= post.nickname %>"/>
-                                        <div>
-                                            <div class="font-bold"><%= post.nickname %> A.K.A <span
-                                                        class="text-gray-500"><%= post.summonerName %></span></div>
-                                            <p class="text-xs text-gray-500"><%= new Date(post.created_at).toLocaleString() %></p>
-                                            <p class="text-gray-700"><%= post.message %></p>
-                                        </div>
-                                        <button class="like-button focus:outline-none" data-post-id="<%= post.id %>">
-                                            <span class="<%= post.user_liked ? 'text-blue-500' : 'text-gray-500' %>">⭐️</span>
-                                        </button>
-                                        <span class="like-counter text-xs"><%= post.like_count > 0 ? post.like_count : '' %></span>
-                                    </div>
-                                <% }) %>
-                            <% } %>
 
+            <% rooms.forEach(room => { %>
+                <div class="rounded-md bg-white p-4 shadow-lg">
+                    <a href="/room/<%= room.id %>">
+                        <div class="w-full flex-none max-w-full bg-gray-200 rounded  p-4    flex flex-col space-y-4">
+                            <div class="flex items-center space-x-2">
+               <span class="text-gray-600">
+       <i class="fa--xf far fa-comments" aria-hidden="true"></i>
+        </span>
+                                <div>
+                                    <h3 class="text-xl font-semibold">
+                                        <a href="/room/<%= room.id %>"
+                                           class="text-blue-600 hover:underline"><%= room.name %></a>
+                                    </h3>
+                                    <div class="text-sm text-gray-500">Description of the room here.</div>
+                                </div>
+                            </div>
+                            <div class="flex space-x-4">
+                                <div class="flex-1">
+                                    <dl class="grid grid-cols-2 gap-x-2">
+                                        <dt class="text-gray-600">Messages</dt>
+                                        <dd><?-?- amount of messages here--></dd>
+                                    </dl>
+                                    <dl class="grid grid-cols-2 gap-x-2">
+                                        <dt class="text-gray-600">Size</dt>
+                                        <dd><%= room.size %></dd>
+                                    </dl>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex items-center space-x-2">
+                                        <a href="#" class="w-12 h-12">
+                                            <img src="summonerIconHere" alt="Kid Goku"
+                                                 class="w-full h-full object-cover rounded-full" loading="lazy">
+                                        </a>
+                                        <div>
+                                            <div>
+                                                <a href="#" class="text-blue-600 hover:underline"
+                                                   title="I'm here to brighten up your day">Nickname</a>
+                                            </div>
+                                            <div class="text-sm text-gray-500">
+                                                <ul class="flex space-x-2">
+                                                    <li>
+                                                        <time class="node-extra-date u-dt" dir="auto"
+                                                              datetime="2023-04-04T04:44:10-0400" data-time="1680597850"
+                                                              data-date-string="Apr 4, 2023" data-time-string="4:44 AM"
+                                                              title="Apr 4, 2023 at 4:44 AM">Apr 4, 2023
+                                                        </time>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" class="text-blue-600 hover:underline" dir="auto"
+                                                           data-user-id="1224" data-xf-init="member-tooltip"
+                                                           id="js-XFUniqueId9">Profile</a>
+                                                    </li>
+                                                    <% if (room.is_private) { %>
+                                                        🔐
+                                                    <% } %>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </div>
+                    </a></div>
+            <% }) %>
+
         </div>
+
     </div>
 
     <!--    modal start-->
@@ -120,7 +124,8 @@
                     <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
                         <div class="sm:flex sm:items-start">
                             <div class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-                                <svg class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                <svg class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24"
+                                     stroke-width="1.5"
                                      stroke="currentColor" aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                           d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/>
@@ -128,6 +133,7 @@
                             </div>
                             <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
                                 <form id="createRoomForm">
+                                    <input type="hidden" name="userId" id="userId" value="<%= userId %>">
                                     <div class="group relative z-0 mb-6 w-full">
                                         <input type="text" name="room_name" id="room_name"
                                                class="peer block w-full appearance-none border-0 border-b-2 border-gray-300 bg-transparent px-0 py-2.5 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0 dark:border-gray-600  dark:focus:border-blue-500"
@@ -145,7 +151,8 @@
                                             Size</label>
                                     </div>
                                     <div class="group relative z-0 mb-6 w-full">
-                                        <input type="checkbox" name="room_private" id="room_private" class="peer"/>
+                                        <input type="checkbox" name="room_private" id="room_private"
+                                               class="peer"/>
                                         <label for="room_private"
                                                class="ml-2 text-sm text-gray-500 duration-300 dark:text-gray-400">Private</label>
                                     </div>
@@ -159,7 +166,8 @@
                                     <p>If you'd like to add user(s) to your room</p>
                                     <div>
                                         <div class="group relative z-0 mb-6 w-full">
-                                            <input type="text" name="search_user" id="floating_search_user" placeholder=" " />
+                                            <input type="text" name="search_user" id="floating_search_user"
+                                                   placeholder=" "/>
                                         </div>
                                     </div>
                                     <div id="suggestions_list"></div>
@@ -221,12 +229,10 @@
     passwordLabel.style.display = privateCheckbox.checked ? 'block' : 'none';
 
 
-
 </script>
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/messages-matchfinder.js" type="module"></script>
 <script src="/js/rooms/roomForm.js" type="module"></script>
-<script src="/js/rooms/invitations.js" type="module"></script>
 
 
 </html>

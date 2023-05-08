@@ -9,10 +9,13 @@ import matchFinderRoutes from './routes/matchFinder.js';
 import registerRoutes from './routes/register.js';
 import summonerRoutes from './routes/summoner.js';
 import dashboardRoutes from './routes/dashboard.js';
+import { getAllRooms } from './routes/matchFinder.js';
+
 import path from "path";
 import dotenv from 'dotenv'
 import {pool} from "./database/connection.js";
 import {getSummonerIconInfoBySummonerName} from "./models/getSummonerData.js";
+import auth from "./middlewares/auth.js";
 dotenv.config()
 
 const server = createServer(app);
@@ -26,9 +29,18 @@ app.use(registerRoutes);
 app.use(logoutRoutes);
 app.use(dashboardRoutes);
 app.use(matchFinderRoutes);
-
 app.get('/offline', (req, res) => {
     res.sendFile('offline.html', {root: path.join(__dirname, 'public')});
+});
+
+app.get('/rooms', auth, async (req, res) => {
+    try {
+        const rooms = await getAllRooms();
+        res.render('rooms', { rooms, userId: req.user.id }); // Pass userId here
+    } catch (error) {
+        console.error('Error fetching rooms:', error);
+        res.status(500).send('Error fetching rooms');
+    }
 });
 
 server.listen(port, () => {
@@ -45,11 +57,13 @@ io.on('connection', (socket) => {
 
         const userId = msgData.userId;
         const isNsfw = msgData.nsfw;
+        const roomId = msgData.roomId;
         const isLiked = false; // Default value
-        await pool.query('INSERT INTO posts (user_id, message, nsfw) VALUES (?, ?, ?)', [userId, msgData.message, isNsfw]);
+        await pool.query('INSERT INTO posts (user_id, message, nsfw, room_id) VALUES (?, ?, ?, ?)', [userId, msgData.message, isNsfw, roomId]);
 
         const [userRows] = await pool.query('SELECT nickname, summoner_name FROM users WHERE id = ?', [userId]);
         const user = userRows[0];
+
 
         // Get the summonerIcon
         const summonerIcon = await getSummonerIconInfoBySummonerName(user.summoner_name);
@@ -79,6 +93,7 @@ io.on('connection', (socket) => {
 
         io.emit('likeToggled', { postId: postId, userId: userId, likeCount: newLikeCount });
     });
+
 
 
     socket.on('disconnect', () => {

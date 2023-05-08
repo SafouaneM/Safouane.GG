@@ -1,4 +1,4 @@
-//todo wow now this is a really bad name o_O
+//todo wow now this is a terrible name o_O
 const socket = io();
 
 function attachLikeButtonListeners() {
@@ -40,10 +40,14 @@ document.getElementById('messageForm').addEventListener('submit', (e) => {
     const messageInput = document.getElementById('messageInput');
     const message = messageInput.value;
     const nsfw = document.getElementById('nsfw').checked;
+    const roomId = document.getElementById('roomId').value;
+
     messageInput.value = '';
 
-    socket.emit('postMessage', {userId, message, nsfw});
+    socket.emit('postMessage', { userId, message, nsfw, roomId });
 });
+
+
 
 socket.on('likeToggled', (data) => {
     const likeButton = document.querySelector(`.like-button[data-post-id="${data.postId}"]`);
