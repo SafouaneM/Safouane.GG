@@ -12,6 +12,7 @@
 </head>
 
 <body class="flex min-h-screen flex-col bg-gray-100">
+<div id="error" style="display: none;" class="fixed top-0 inset-x-0 px-2 py-4 z-50 bg-red-600 text-gray-600 text-center">You are disconnected</div>
 <header class="bg-white shadow">
     <nav class="container mx-auto px-6 py-3">
         <div class="flex items-center justify-between">
@@ -233,6 +234,7 @@
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/messages-matchfinder.js" type="module"></script>
 <script src="/js/rooms/roomForm.js" type="module"></script>
+<script src="/js/rooms/offlineMessage.js" type="module"></script>
 
 
 </html>

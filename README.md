@@ -93,7 +93,10 @@ You can request an api key from this url, it'll take no longer then 1 minute to 
 
 ### !(Do note you need a riot games account to generate a key.)!
 
+
 ## The assignment
+
+## The assignment (Progressive web apps)
 
 We got the task to rebuild our old client side application to better server side applications, using express and nodejs.
 I'd like to explain the differences between client side and server side applications, and what their benefits and

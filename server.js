@@ -50,7 +50,6 @@ server.listen(port, () => {
 
 io.on('connection', (socket) => {
     console.log('a user connected');
-
     socket.on('postMessage', async (msgData) => {
         console.log('msgData: ', msgData);
         console.log('message: ' + msgData.message);
@@ -99,4 +98,7 @@ io.on('connection', (socket) => {
     socket.on('disconnect', () => {
         console.log('user disconnected');
     });
+
 });
+
+
