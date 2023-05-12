@@ -271,10 +271,9 @@ In this application, MySQL is used to store user data, message data, room data, 
 ## Conclusion
 This application showcases the power of real-time communication in creating dynamic, interactive user experiences. It demonstrates how technologies like Node.js, Socket.IO, and MySQL can be used together to build a robust, real-time chat and gaming platform.
 
-## Activity diagram 
 
-
-## Data model van je Api 
+## Data lifecycle model 
+![Screenshot 2023-05-12 at 23 31 40](https://github.com/SafouaneM/Safouane.GG/assets/31611670/79ce93d2-9cfd-42a4-a0d1-e8f33b15d308)
 
 ---
 
