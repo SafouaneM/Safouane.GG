@@ -2,7 +2,7 @@
 
 Safouane.gg is an application that tries to be like several other pages like op.gg and u.gg, it's still in development
 so it's full potiental has yet to be shown but do return to this readme every now and then to catch the latest updates.
-a!
+!
 
 ![My project-1 (8)](https://user-images.githubusercontent.com/31611670/230155426-51ffcfd6-1c77-4b4a-b569-d1eab8bc1ad3.png)
 
@@ -18,7 +18,7 @@ application)
 
 ~ = In development
 
-Some chatgpt recommendations that I'll put in my application soon, because it's relevant to our next course (
+Some chatgpt recommendations that I'll maybe consider eventually ;) put in my application soon, because it's relevant to our next course (
 real-time-web)
 
 Live game data: Using the Spectator V4 API, you can retrieve real-time data about the current game a player is
@@ -45,7 +45,7 @@ events happen, such as when a player they follow begins a new game or achieves a
 
 | Features                                          | Progress |
 |---------------------------------------------------|----------|
-| Summoner search.                                  | [☑️].    
+| Summoner search.                                  | [☑️].    |
 | Summoner details.                                 | [☑️].    |
 | Summoner extra mastery details with champion data | [☑️].    |
 | Champion overview.                                | [☑️].    |
@@ -58,7 +58,21 @@ events happen, such as when a player they follow begins a new game or achieves a
 | Drafting tool/simulator                           | [].      |
 | Esports calendar                                  | [].      |
 
-### Ideas that I'm tinkering with right now
+
+### Installation
+
+```text
+git clone git@github.com:SafouaneM/Safouane.GG.git
+```
+
+And you should be good to go now, do not forget to implement your own api key in the env.
+You can request an api key from this url, it'll take no longer then 1 minute to generate one
+
+### !(Do note you need a riot games account to generate a key.)!
+
+# The assignment (Real time web) 
+
+## Idea that started this further development on my old application
 
 We are going to create a way where users can register an account, after registering an account he/she will see data
 about their account as the summonerName that they provided will be used for their profile data. So they can see their
@@ -82,21 +96,184 @@ private message or open a request to start a chatroom so they can duke it out th
 want to find teams, so requests like those could have a requirement of 5 people and then the chatroom locks off from
 other people stuff like that. I want to create the database management with mysql as I’m familiar with their use case.
 
-### Installation
+---
 
-```text
-git clone git@github.com:SafouaneM/Safouane.GG.git
+## The start
+
+We got the task to build a realtime web application, and I've decided to continue building on my application that I
+started building when we started web app from scratch after that I've continued building this application in our next
+project called progressive web app. There I refactored my client side application to a server side application.
+
+I've added a new functionality in my old application that is a real time web functionality, I've decided to create a
+chatroom.
+
+This chatroom has some real time functionalities, like
+
+| Real time features                                                | Progress |
+|-------------------------------------------------------------------|----------|
+| Sending messages and receiving messages in real-time.             | [☑️].    |
+| Liking and disliking messages.                                    | [☑️].    |
+| Receiving an offline prompt when the socket has been disconnected | [☑️].    |
+| Seeing new rooms that are created in real time.                   | [~].     |
+| Sending invites and accepting or declining them in real time      | [~].     |
+
+
+So I've decided to implement *5* different real time web features in my application, 3 of them as we speak are finished
+and 2 others are still in progress.
+
+I'd like to explain why we're using real time features in our application and why it makes sense, and what tools we've
+used.
+
+### Why introduce real time features in our application??
+
+It's common and recommended to separate client-side and server-side code when building a website. This keeps the code
+organized and easier to understand and maintain. The server-side code runs on the server and handles tasks like handling
+requests, communicating with the database, and managing connections with the user. The client-side code runs in the
+user's browser and handles tasks like updating the interface and sending user input to the server.
+
+The real-time socket.io library is often used for building chatroom applications because it enables real-time
+communication between the server and the user's browser. It uses WebSockets to manage connections between the server and
+the browser, allowing messages to be sent and received quickly without the need for regular HTTP requests. This results
+in a smoother user experience and less lag in the chatroom application.
+
+### Tools
+
+I've introduced 2 new tools in our application
+
+Socket.io library so that we use
+
+- Socket.io
+- MYSQL
+
+## Talking about the functionalities that we've added
+
+Sending messages and receiving messages in real-time
+Liking and disliking messages.
+Receiving an offline prompt when the socket has been disconnected
+Viewing rooms and seeing new rooms that are created in real time.
+Sending invites and accepting or declining them in real time
+
+# Application Overview
+I expanded on the gaming platform application and I've added a real-time chat and that allows users to communicate, send invites and accept or decline them in real time. It provides a dynamic and interactive environment where users can stay connected, enjoy gaming, and have conversations.
+
+The application is built on a robust tech stack that includes Node.js for the server, MySQL for the database, and Socket.IO for real-time communication.
+
+Features that are relevant for this class
+- Real-time Messaging
+- Users can send and receive messages in real-time. This is accomplished using Socket.IO, a library that facilitates real-time, bidirectional and event-based communication. When a user posts a message, it's sent to the server via a 'postMessage' event. The server then broadcasts this message to all connected clients.
+
+```js
+socket.on('postMessage', async (msgData) => {
+// Handle the message...
+io.emit('newMessage', { /* message data */ });
+});
+```
+## Liking and Disliking Messages
+Users can express their appreciation for messages by liking them. This is again handled in real-time using Socket.IO. When a user likes or unlikes a message, an event is sent to the server, which then updates the like count for the message in the database and broadcasts an event to update the like count on all clients.
+```js
+socket.on('toggleLike', async ({ postId, userId }) => {
+// Handle the like...
+io.emit('likeToggled', { postId: postId, userId: userId, likeCount: newLikeCount });
+});
+```
+## Offline Prompt
+The application intelligently handles network disconnects. If a user's connection drops, an offline prompt is displayed, informing them of the disconnection. This is achieved by listening to the 'disconnect' event from Socket.IO and then displaying an error message.
+
+```js
+socket.on('disconnect', () => {
+console.log('Socket is disconnected');
+error.textContent = 'You are disconnected';
+error.style.display = 'block';
+});
 ```
 
-And you should be good to go now, do not forget to implement your own api key in the env.
-You can request an api key from this url, it'll take no longer then 1 minute to generate one
+## Riot Games API Integration
+Our application is integrated with the Riot Games API. This integration allows us to provide additional features to the users, such as displaying their League of Legends profile information and in-game statistics. When a user registers their summoner name on our platform, we use the Riot Games API to fetch their profile data.
 
-### !(Do note you need a riot games account to generate a key.)!
+```js
+const fetchSummonerData = async (summonerName) => {
+const response = await axios.get(`https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summonerName}?api_key=${RIOT_API_KEY}`);
+return response.data;
+};
+```
+This function fetches the summoner data from the Riot Games API using the registered summoner name and displays it on the user's profile.
 
+In addition, the Riot Games API also provides us with the ability to fetch and display user avatars in real-time in our chatrooms, enhancing the user experience and immersion.
 
-## The assignment
+## User Registration and Login
+User registration and login are critical features in our application, allowing users to have personalized profiles and experiences.
 
-## The assignment (Progressive web apps)
+During registration, users are required to provide their username, email, password, and their League of Legends summoner name. The password is hashed using a reliable hashing algorithm (bcrypt) before it's stored in the database, ensuring the security of user data.
+
+### DO NOTE summonerName can't be verified yet as I'm applying for a product key, and then I have to apply for a RSO OAUTH key from riot games 
+https://gist.github.com/Henrik-3/d6b631fb7c61821bc16b17cd347a3811 <-- Documentation
+
+```js
+const hashedPassword = await bcrypt.hash(password, 10);
+```
+For login, users provide their username and password. The application then verifies the provided information by comparing the hashed password in the database with the hashed version of the provided password. If they match, the user is authenticated and granted access to their account.
+
+The application also uses session-based authentication, where a session is established once a user logs in, and the session remains active until the user logs out. This allows the server to remember the state of authentication and provide a seamless experience for the user.
+
+Overall, these features provide a secure and personalized user experience, contributing to the overall appeal and functionality of the application.
+
+## Room Creation and User Interaction
+One of the core features of our application is the ability for users to create rooms for communication. When a user creates a room, they become the owner and can invite other users to join the room. This functionality fosters interaction and engagement among users.
+
+When a room is created, a unique identifier is associated with it. This identifier is used to track the room and the interactions within it.
+
+```js
+app.post('/createRoom', auth, async (req, res) => {
+const roomName = req.body.roomName;
+const roomOwner = req.user.id;
+
+    const result = await createRoom(roomName, roomOwner);
+    res.json(result.insertId);
+});
+```
+In the above function, we create a new room with a unique identifier (result.insertId), a name provided by the user (roomName), and the user's id (roomOwner).
+
+The user who creates the room is automatically added to the room's member list in the database, and they can then invite other users to join the room.
+
+The invitations are handled in real-time. When a user sends an invitation, the recipient immediately receives a notification, and they can choose to accept or decline the invite.
+
+```js
+socket.on('sendInvite', (inviteData) => {
+const recipientSocket = userSockets[inviteData.recipientId];
+if (recipientSocket) {
+recipientSocket.emit('receiveInvite', inviteData);
+}
+});
+```
+In the above function, the sendInvite event triggers a real-time notification to the recipient user, which is handled using the socket.io library.
+
+This real-time interaction and notification system makes the user experience smooth and engaging.
+
+## Room Viewing
+Users can view different rooms and see new rooms as they're created, all in real time. This provides a dynamic, engaging experience for users.
+
+## Invites
+Users can send, accept, and decline game invites in real time. This allows users to quickly and seamlessly set up games with others.
+
+## Folder Structure
+The project follows a clear and intuitive folder structure. Here's a brief overview:
+
+routes/ - Contains all the route handlers for the application.
+models/ - Contains the functions to interact with the api.
+middlewares/ - Contains middleware functions for tasks like authentication.
+database/ - Contains files related to database setup and connections.
+
+## Database
+MySQL was chosen as the database for this application due to its wide adoption, robust features, and the familiarity of the developer with it. MySQL provides a stable, reliable, and efficient solution for storing and retrieving data.
+
+In this application, MySQL is used to store user data, message data, room data, and more, providing a solid backbone for the application's operations. The database is interacted with using SQL queries, allowing for precise, powerful data manipulation.
+
+## Conclusion
+This application showcases the power of real-time communication in creating dynamic, interactive user experiences. It demonstrates how technologies like Node.js, Socket.IO, and MySQL can be used together to build a robust, real-time chat and gaming platform.
+
+---
+
+# The assignment (Progressive web apps)
 
 We got the task to rebuild our old client side application to better server side applications, using express and nodejs.
 I'd like to explain the differences between client side and server side applications, and what their benefits and
@@ -448,6 +625,7 @@ If you want to know more about this really cool api here's something cool to kno
 To format an image to webp, you can add "&fm=webp" to the end of the URL, like this:
 
 *
+
 *[https://champion-images.imgix.net/Akshan_0.jpg?w=500&auto=compress&fm=webp](https://champion-images.imgix.net/Akshan_0.jpg?w=500&auto=compress&fm=webp)
 **
 
@@ -462,6 +640,7 @@ parameters to further optimize the image for web delivery, such as:
 Here's an example URL with these additional parameters:
 
 *
+
 *[https://champion-images.imgix.net/Akshan_0.jpg?w=500&auto=compress&fm=webp&q=75&dpr=2](https://champion-images.imgix.net/Akshan_0.jpg?w=500&auto=compress&fm=webp&q=75&dpr=2)
 **
 

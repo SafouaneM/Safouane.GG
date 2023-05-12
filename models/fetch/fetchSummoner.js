@@ -5,7 +5,8 @@ const apiKey = process.env.RIOT_API_KEY;
 
 const fetchSummoner = async (summonerName) => {
     try {
-        const summonerDataResponse = await fetch(`https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summonerName}?api_key=${apiKey}`);
+        const encodedSummonerName = encodeURIComponent(summonerName);
+        const summonerDataResponse = await fetch(`https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${encodedSummonerName}?api_key=${apiKey}`);
         if(!summonerDataResponse.ok) {
             throw new Error('No response between range 200-299');
         }
