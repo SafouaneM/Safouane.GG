@@ -1,40 +1,59 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
     <link rel="stylesheet" href="/main.css">
 </head>
-<body>
-<form method="POST" action="/register" class="max-w-sm mx-auto mt-6">
-    <p>hopelijk werkt dit!</p>
-    <div class="mb-4">
-        <label for="username" class="block text-gray-700 font-bold mb-2">Username: *</label>
-        <input type="text" id="username" name="nickname" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-    </div>
-    <div class="mb-4">
-        <label for="email" class="block text-gray-700 font-bold mb-2">Email: *</label>
-        <input type="email" id="email" name="email" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-    </div>
-    <div class="mb-4">
-        <label for="summoner_name" class="block text-gray-700 font-bold mb-2">Summoner Name:</label>
-        <input type="text" id="summoner_name" name="summoner_name"  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-    </div>
-    <div class="mb-4">
-        <label for="discord_tag" class="block text-gray-700 font-bold mb-2">Discord tag:</label>
-        <input type="text" id="discord_tag" name="discord_tag"  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-    </div>
-    <div class="mb-4">
-        <label for="password" class="block text-gray-700 font-bold mb-2">Password: *</label>
-        <input type="password" id="password" name="password" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-    </div>
-    <div class="mb-6">
-        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Register</button>
-    </div>
-</form>
+<body class="bg-gray-100">
+<div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full space-y-8">
+        <div>
+            <img class="mx-auto h-12 w-auto" src="/icons/logo.png" alt="Workflow">
+            <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+                Register for a new  account
+            </h2>
+        </div>
+        <form method="POST" action="/register" class="max-w-sm mx-auto mt-6">
+            <div class="rounded-md shadow-sm -space-y-px">
+                <div>
+                    <label for="username" class="sr-only">username</label>
+                    <input id="username" name="username" type="text" autocomplete="username" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="username">
+                </div>
+                <div>
+                    <label for="email" class="sr-only">Email address</label>
+                    <input id="email" name="email" type="email" autocomplete="email" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Email address">
+                </div>
+                <div>
+                    <label for="summoner_name" class="sr-only">Summoner name</label>
+                    <input id="summoner_name" name="summoner_name" type="text" autocomplete="summoner_name" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="summoner name">
+                </div>
+                <div>
+                    <label for="discord_tag" class="sr-only">Email address</label>
+                    <input id="discord_tag" name="discord_tag" type="text" autocomplete="discord_tag" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="discord tag">
+                </div>
+                <div>
+                    <label for="password" class="sr-only">Password</label>
+                    <input id="password" name="password" type="password" autocomplete="current-password" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Password">
+                </div>
+            </div>
 
+
+
+            <div>
+                <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Sign in
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
 </body>
 </html>
+
+
+
+
+
+
