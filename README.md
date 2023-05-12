@@ -72,6 +72,22 @@ You can request an api key from this url, it'll take no longer then 1 minute to 
 
 # The assignment (Real time web) 
 
+![Screenshot 2023-05-12 at 02 15 17](https://github.com/SafouaneM/Safouane.GG/assets/31611670/d0406d6b-3ead-4bf8-b72a-2b79a6e48515)
+
+![Screenshot 2023-05-12 at 02 15 20](https://github.com/SafouaneM/Safouane.GG/assets/31611670/b51d9f39-73e0-48f6-9ac0-0bca72d89b9c)
+![Screenshot 2023-05-12 at 02 15 27](https://github.com/SafouaneM/Safouane.GG/assets/31611670/b2f61191-7e6e-4182-9825-55193a2c4d68)
+
+![Screenshot 2023-05-12 at 02 15 36](https://github.com/SafouaneM/Safouane.GG/assets/31611670/4d5a14c1-0131-41b5-95c6-df47a70401b8)
+![Screenshot 2023-05-12 at 02 15 41](https://github.com/SafouaneM/Safouane.GG/assets/31611670/9211573f-d002-41c9-a0b2-516ce10f260d)
+![Screenshot 2023-05-12 at 02 15 48](https://github.com/SafouaneM/Safouane.GG/assets/31611670/2eebd038-d28c-48e6-a8e4-40980edbbcad)
+![Screenshot 2023-05-12 at 02 15 52](https://github.com/SafouaneM/Safouane.GG/assets/31611670/3e5c9e2d-0ed8-4712-be8d-1906cb172bb5)
+![Screenshot 2023-05-12 at 02 16 16](https://github.com/SafouaneM/Safouane.GG/assets/31611670/47c17ef2-9558-46a7-b80a-13d9db0383bb)
+![Screenshot 2023-05-12 at 02 16 26](https://github.com/SafouaneM/Safouane.GG/assets/31611670/44cc37f2-2e37-485c-bf1a-8dc12d053cc3)
+
+https://github.com/SafouaneM/Safouane.GG/assets/31611670/568c0710-927f-4127-8003-b112be711fe1
+
+
+
 ## Idea that started this further development on my old application
 
 We are going to create a way where users can register an account, after registering an account he/she will see data
