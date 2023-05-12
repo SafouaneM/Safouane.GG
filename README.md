@@ -72,6 +72,21 @@ You can request an api key from this url, it'll take no longer then 1 minute to 
 
 # The assignment (Real time web) 
 
+## PLEASE NOTE
+
+### Testdata accounts as we assume you don't have a leauge of legends account
+username: lbpfroste@gmail.com 
+password: potlood1
+
+username: daan@gmail.com
+password: potlood1
+
+username: nigel@gmail.com
+password: potlood1
+
+username: bram@gmail.com
+password: potlood1
+
 ![Screenshot 2023-05-12 at 02 15 17](https://github.com/SafouaneM/Safouane.GG/assets/31611670/d0406d6b-3ead-4bf8-b72a-2b79a6e48515)
 
 ![Screenshot 2023-05-12 at 02 15 20](https://github.com/SafouaneM/Safouane.GG/assets/31611670/b51d9f39-73e0-48f6-9ac0-0bca72d89b9c)
