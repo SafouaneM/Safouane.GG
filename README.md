@@ -39,7 +39,7 @@ events happen, such as when a player they follow begins a new game or achieves a
 - [x] Adding Loading states
 - [x] Adding Fail states
 - [x] Responsive design
-- [x] More consistent with the UI and make it more User friendly
+- [~] More consistent with the UI and make it more User friendly
 - [~] More pleasing to look at design
 - [~] Autocomplete when you're looking for a summoner
 
